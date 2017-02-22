@@ -7,39 +7,27 @@ Cordova Library for integrating with the eGHL payment gateway's mobile SDK.
 Installation
 ------------
 
-`cordova plugin add org.cloudsky.cordovaplugins.eghl`
+`cordova plugin add my.com.nexstream.cordovaplugins.eghl`
 
 Usage
 -----
 
 ```javascript
-cloudSky.eGHL.makePayment(
+eGHL.makePayment(
     {
         /*
         * Mandatory payment parameters list:
-        * ------------------------------
-        * "ServiceID","Amount", "MerchantName","PaymentID","OrderNumber","CurrencyCode","LanguageCode",
-        * "PymtMethod","PageTimeout","TransactionType","MerchantReturnURL", "PaymentGateway"
-        * ====================================================================================
-        * Optional payment parameters list:
-        * ---------------------------------
-        * "TransactionType","PymtMethod","ServiceID","PaymentID","OrderNumber","PaymentDesc",
-        * "Amount","CustIP","CustName","CustEmail","CustPhone", "MerchantName",
-        * "CurrencyCode","LanguageCode","PageTimeout","PromoCode","B4TaxAmt","TaxAmt","EPPMonth",
-        * "CardHolder", "CardNo", "CardExp", "CardCVV2","IssuingBank","TokenType","Token",
-        * "MerchantReturnURL", "MerchantCallbackURL", "MerchantApprovalURL","MerchantUnApprovalURL",
-        * "Param6", "Param7", "HashValue"
+        * ----------------------------------
+        * [All Field are defined as String]
         */
 
-
-        ServiceID: 123 //Merchant Service ID given by eGHL
-        Amount: 123.10 // e.g. 1000.00 for IDR
-                             // Invalid format: 1,000.00 or 1000
+        Amount: "123.10" // e.g. 1000.00 for IDR
+                       // Invalid format: 1,000.00 or 1000
         MerchantName: "TGV"
         CurrencyCode: "MYR" | ...
         LanguageCode: "MY" | "EN" | "CN" ...
         PymtMethod: "ANY" | "AUTH"
-        PageTimeout: "30" // timeout in seconds
+        PageTimeout: "780" // timeout in seconds
         TransactionType: "SALE"
         PaymentDesc: "eGHL Payment testing"
 
@@ -47,25 +35,28 @@ cloudSky.eGHL.makePayment(
         CustEmail: "Tester@mail.com"
         CustPhone: "60123456789"
 
+        PaymentID: "P0000001" // Unique string for each payment
+        OrderNumber: "B0001231" // Order number to refer current payment, can duplicate.
+
+        // Fixed parameters for every payment
+        ServiceID: "sit" //Merchant Code or Service ID given by eGHL
+        Password: "sit12345" //Password for Merchant
         MerchantReturnURL: "https://*" // Callback url after successful payment
         PaymentGateway: "https://*" // provided by eGHL
-
-        PaymentID: "STRING" //EGHLAPI().getEGHLRandomID("CNASIT");
-        OrderNumber: "STRING" //EGHLAPI().getEGHLRandomID("CNASIT");
-
+        MerchantCallbackURL: "https://*" // server callback url
     },
     function (resp) {
         // Success callback
-        // resp = {
-        //     "OK"      0 = Transaction successful ||
-        // }
+        // resp =
+        //     0 = Transaction successful.
+        //
     },
     function (err) {
         // Failure callback
-        // err = {
-        //     "FAILED"  1 = Transaction failed ||
-        //     "Pending" 2 = Transaction Pending
-        // }
+        // err =
+        //     1 = Transaction failed ||
+        //     2 = Transaction Pending
+        //
     }
 )
 ```

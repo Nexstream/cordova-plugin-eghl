@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        id="my.com.nexstream.cordovaplugins.eghl" version="1.0.0">
+<!--my.com.nexstream.cordovaPlugins;-->
+    <engines>
+        <engine name="cordova" version=">=3.0.0" />
+    </engines>
+
+    <name>eGHL</name>
+    <author>Nexstream Sdn Bhd</author>
+    <description>Plugin to integrate with eGHL's mobile SDK.</description>
+    <license>Apache 2.0</license>
+    <keywords>eghl,payment,gateway</keywords>
+
+    <js-module src="www/eGHL.js" name="eGHL">
+        <clobbers target="eGHL" />
+    </js-module>
+
+    <platform name="android">
+        <framework src="com.android.support:support-compat:25.0.1" />
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="eGHL">
+                <param name="android-package" value="my.com.nexstream.cordovaPlugins.EGHL"/>
+            </feature>
+            <access origin="https://test2pay.ghl.com" />
+            <access origin="https://*" /><!-- Bank websites... -->
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.INTERNET" />
+            <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="application">
+            <activity android:name="my.com.nexstream.cordovaPlugins.EGHLStart" android:configChanges="orientation|screenSize" />
+        </config-file>
+        <source-file src="android/EGHLStart.java" target-dir="src/my/com/nexstream/cordovaPlugins" />
+        <source-file src="android/EGHL.java" target-dir="src/my/com/nexstream/cordovaPlugins" />
+        <source-file src="android/eghl-sdk-v1.4.5.jar" target-dir="libs" />
+    </platform>
+    <!--<platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="eGHL">
+                <param name="ios-package" value="eGHL"/>
+            </feature>
+            <access origin="https://test2pay.ghl.com" />
+            <access origin="https://*" />
+       </config-file>
+        <header-file src="ios/Ipay.h" />
+        <header-file src="ios/IpayPayment.h" />
+        <header-file src="ios/CsIPay88.h" />
+        <source-file src="ios/CsIPay88.m" />
+        <source-file src="ios/libipay88sdk.a" framework="true" />
+    </platform>-->
+
+</plugin>
