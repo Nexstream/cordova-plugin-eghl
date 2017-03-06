@@ -53,7 +53,7 @@ class eGHL {
     makePayment (params, success, error)
     {
         argscheck.checkArgs('ofF', 'eGHL.makePayment', arguments);
-        exec(success, error, 'eGHL', 'makepayment', [params]);
+        exec(success, error, 'eGHL', 'makePayment', [params]);
     }
 
 };
