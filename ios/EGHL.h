@@ -8,6 +8,8 @@ typedef enum {
 
 @interface EGHL : CDVPlugin
 
+- (void)pluginInitialize;
+
 - (void)makePayment: (CDVInvokedUrlCommand*)command;
 
 - (void)endPaymentWithStatus: (PaymentStatus)status;

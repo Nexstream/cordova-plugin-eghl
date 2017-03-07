@@ -9,6 +9,7 @@
 @property Boolean paymentInProgress;
 @property UIViewController *contentViewController;
 @property CDVInvokedUrlCommand* command;
+@property NSArray *eGHLStringParams;
 
 @end
 
@@ -20,9 +21,60 @@
 @synthesize paymentInProgress;
 @synthesize contentViewController;
 @synthesize command;
+@synthesize eGHLStringParams;
 
 
 #pragma mark - Plugin API
+
+- (void)pluginInitialize
+{
+    if(self.eGHLStringParams == nil) {
+        self.eGHLStringParams = @[
+            @"Amount",
+            @"PaymentID",
+            @"OrderNumber",
+            @"MerchantName",
+            @"ServiceID",
+            @"PymtMethod",
+            @"MerchantReturnURL",
+            @"CustEmail",
+            @"Password",
+            @"CustPhone",
+            @"CurrencyCode",
+            @"CustName",
+            @"LanguageCode",
+            @"PaymentDesc",
+            @"PageTimeout",
+            @"CustIP",
+            @"MerchantApprovalURL",
+            @"CustMAC",
+            @"MerchantUnApprovalURL",
+            @"CardHolder",
+            @"CardNo",
+            @"CardExp",
+            @"CardCVV2",
+            @"BillAddr",
+            @"BillPostal",
+            @"BillCity",
+            @"BillRegion",
+            @"BillCountry",
+            @"ShipAddr",
+            @"ShipPostal",
+            @"ShipCity",
+            @"ShipRegion",
+            @"ShipCountry",
+            @"TokenType",
+            @"Token",
+            @"SessionID",
+            @"IssuingBank",
+            @"MerchantCallBackURL",
+            @"B4TaxAmt",
+            @"TaxAmt",
+            @"Param6",
+            @"Param7"
+        ];
+    }
+}
 
 - (void)makePayment: (CDVInvokedUrlCommand*)command
 {
@@ -43,24 +95,13 @@
     self.command = command;
 
     PaymentRequestPARAM *payParams = [[PaymentRequestPARAM alloc] init];
-    payParams.Amount =       [args objectForKey:@"Amount"];
-    payParams.MerchantName = [args objectForKey:@"MerchantName"];
-    payParams.CustEmail =    [args objectForKey:@"CustEmail"];
-    payParams.CustName =     [args objectForKey:@"CustName"];
-    payParams.ServiceID =    [args objectForKey:@"ServiceID"];
-    payParams.Password =     [args objectForKey:@"Password"];
-    payParams.CurrencyCode = [args objectForKey:@"CurrencyCode"];
-    payParams.PaymentID =    [args objectForKey:@"PaymentID"];
-    payParams.OrderNumber =  [args objectForKey:@"OrderNumber"];
-    payParams.MerchantReturnURL = [args objectForKey:@"MerchantReturnURL"];
-    payParams.MerchantCallBackURL = [args objectForKey:@"MerchantCallBackURL"];
-    payParams.CustPhone =    [args objectForKey:@"CustPhone"];
-    payParams.LanguageCode = [args objectForKey:@"LanguageCode"];
-    payParams.PageTimeout =  [args objectForKey:@"PageTimeout"];
-    payParams.PaymentDesc =  [args objectForKey:@"PaymentDesc"];
-    payParams.IssuingBank =  [args objectForKey:@"IssuingBank"];
-    payParams.PymtMethod =   [args objectForKey:@"PymtMethod"];
-    payParams.RealHost =     [args objectForKey:@"RealHost"];
+    payParams.RealHost = [args objectForKey:@"RealHost"]; // Can't check BOOL for nil, so we always have to set this param...
+    for(NSString *paramName in self.eGHLStringParams) {
+        NSString *paramValue = [args objectForKey:paramName];
+        if(paramValue != nil) {
+            [payParams setValue:paramValue forKey:paramName];
+        }
+    }
 
     EGHLPayViewController *payViewController =
         [[EGHLPayViewController alloc] initWithEGHLPlugin:self
