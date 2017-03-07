@@ -3,13 +3,12 @@
 var argscheck = require('cordova/argscheck'),
     exec      = require('cordova/exec');
 
-class eGHL {
+var eGHL = function() {
+    var name = "eGHL Cordova Plugin";
+    var version = "v0.1"
+}
 
-    constructor(){
-        this.name = "eGHL Cordova Plugin";
-        this.version = "v0.1"
-    }
-
+eGHL.prototype = {
     // FUNCTION MAKEPAYMENT
     // params =
     // {
@@ -50,12 +49,12 @@ class eGHL {
     //   1: "Failed" or
     //   2: "Pending"
     //
-    makePayment (params, success, error)
+    makePayment: function(params, success, error)
     {
+        console.log(params, success, error);
         argscheck.checkArgs('ofF', 'eGHL.makePayment', arguments);
-        exec(success, error, 'eGHL', 'makepayment', [params]);
-    }
-
+        exec(success, error, 'eGHL', 'makePayment', [params]);
+    },
 };
 
-module.exports = new eGHL;
+module.exports = new eGHL();
