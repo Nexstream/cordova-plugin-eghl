@@ -101,6 +101,7 @@ public class eGHLPay extends CordovaPlugin {
                 .setLanguageCode(eghlPayParams.getLanguageCode())
                 .setPageTimeout(eghlPayParams.getPageTimeout())
                 .setServiceId(eghlPayParams.getServiceId())
+                .setIssuingBank(eghlPayParams.getIssuingBank())
                 .setAmount(eghlPayParams.getAmount())
                 .setCustName(eghlPayParams.getCustName())
                 .setCustEmail(eghlPayParams.getCustEmail())

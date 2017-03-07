@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-        id="my.com.nexstream.cordovaplugins.eghl" version="1.0.0">
+        id="cordova-plugin-eghl" version="1.0.0">
 <!--my.com.nexstream.cordovaPlugins;-->
     <engines>
         <engine name="cordova" version=">=3.0.0" />

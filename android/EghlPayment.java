@@ -63,6 +63,9 @@ public class EghlPayment {
     @SerializedName("OrderNumber")
     private String orderNumber = "";
 
+    @SerializedName("IssuingBank")
+    private String issuingBank = "";
+
     @SerializedName("ServiceID")
     private String serviceId = "";
 
@@ -186,6 +189,14 @@ public class EghlPayment {
 
     public void setOrderNumber(String orderNumber) {
         this.orderNumber = orderNumber;
+    }
+
+    public String getIssuingBank() {
+        return issuingBank;
+    }
+
+    public void setIssuingBank(String issuingBank) {
+        this.issuingBank = issuingBank;
     }
 
     public String getServiceId() {
