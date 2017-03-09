@@ -254,38 +254,5 @@ public class EghlPayment {
     public void setParam7(String param7) {
         this.param7 = param7;
     }
-//    private String custIp = "";
-//    private String b4TaxAmt = "";
-//    private String taxAmt = "";
-//    private String custMac = "";
-//    private String merchantApprovalUrl = "";
-//    private String merchantUnapprovalUrl = "";
-//    private String cardHolder = "";
-//    private String cardNo = "";
-//    private String cardExp = "";
-//    private String cardCvv2 = "";
-//    private String issuingBank = "";
-//    private String billAddr = "";
-//    private String billPostal = "";
-//    private String billCity = "";
-//    private String billRegion = "";
-//    private String billCountry = "";
-//    private String shipAddr = "";
-//    private String shipPostal = "";
-//    private String shipCity = "";
-//    private String shipRegion = "";
-//    private String shipCountry = "";
-//    private String sessionId = "";
-//    private String eppMonth = "";
-//    private String promoCode = "";
-//    private String reqToken = "";
-//    private String pairingToken = "";
-//    private String reqVerifier = "";
-//    private String pairingVerifier = "";
-//    private String checkoutResourceURL = "";
-//    private String cardID = "";
-//    private String preCheckoutID = "";
-//    private int paymentTimeout = -1;
-//    private String[] REQUIRED_FIELDS;
 
 }
