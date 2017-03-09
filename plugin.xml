@@ -20,6 +20,7 @@
         <framework src="build-extras-eghl.gradle" custom="true" type="gradleReference" />
         <framework src="com.android.support:support-compat:25.0.1" />
         <config-file target="res/xml/config.xml" parent="/*">
+            <preference name="android-minSdkVersion" value="17" />
             <feature name="eGHL">
                 <param name="android-package" value="my.com.nexstream.cordovaPlugins.eGHLPay"/>
             </feature>
