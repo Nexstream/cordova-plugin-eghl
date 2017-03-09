@@ -43,19 +43,23 @@
         <source-file src="android/EghlPayment.java" target-dir="src/my/com/nexstream/cordovaPlugins" />
         <source-file src="android/eghl-sdk-v2.1.0.aar" target-dir="libs" />
     </platform>
-    <!--<platform name="ios">
+
+    <platform name="ios">
         <config-file target="config.xml" parent="/*">
             <feature name="eGHL">
-                <param name="ios-package" value="eGHL"/>
+                <param name="ios-package" value="EGHL"/>
             </feature>
             <access origin="https://test2pay.ghl.com" />
             <access origin="https://*" />
-       </config-file>
-        <header-file src="ios/Ipay.h" />
-        <header-file src="ios/IpayPayment.h" />
-        <header-file src="ios/CsIPay88.h" />
-        <source-file src="ios/CsIPay88.m" />
-        <source-file src="ios/libipay88sdk.a" framework="true" />
-    </platform>-->
+        </config-file>
+
+        <resource-file src="ios/eghl-sdk/guidehandicon.png" />
+        <header-file src="ios/eghl-sdk/EGHLPayment.h" />
+        <source-file src="ios/eghl-sdk/libEGHLPayment.a" framework="true" />
+        <header-file src="ios/EGHL.h" />
+        <source-file src="ios/EGHL.m" />
+        <header-file src="ios/EGHLPayViewController.h" />
+        <source-file src="ios/EGHLPayViewController.m" />
+    </platform>
 
 </plugin>
