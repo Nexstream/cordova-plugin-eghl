@@ -1,3 +1,10 @@
+/***
+
+Initiates payment UI. Automatically re-queries eGHL for payment status if
+necessary (at most one requery before giving up and failing).
+
+***/
+
 #import "EGHLPayViewController.h"
 #import <Cordova/CDV.h>
 
@@ -94,10 +101,66 @@
     switch ([alertView tag]) {
         case CANCEL_PAYMENT_TAG:
             if(buttonIndex == 1) {
-                [self.cdvPlugin endPaymentWithCancellation];
+                [self performRequery];
             }
             break;
     }
+}
+
+
+#pragma mark - Helpers
+
+- (void)processResults: (PaymentRespPARAM*)result withRequery: (BOOL)shouldRequery
+{
+    if(!result.TxnExists || !result.TxnStatus) {
+        // Unexpected nil fields.
+        [self.cdvPlugin endPaymentWithFailureMessage:result.TxnMessage];
+    } else if([result.TxnExists isEqualToString:@"0"]) {
+        // Transaction exists.
+        if([result.TxnStatus isEqualToString:@"0"]) {
+            // Transaction successful.
+            [self.cdvPlugin endPaymentSuccessfullyWithResult:result];
+        } else if([result.TxnStatus isEqualToString:@"1"]) {
+            // Transaction failed.
+            [self.cdvPlugin endPaymentSuccessfullyWithResult:result];
+        } else if([result.TxnStatus isEqualToString:@"2"]) {
+            if(shouldRequery) {
+                // Transaction pending and should requery.
+                [self performRequery];
+            } else {
+                // Transaction pending and should NOT requery. Assume user cancelled.
+                [self.cdvPlugin endPaymentWithCancellation];
+            }
+        } else {
+            // Unknown status.
+            [self.cdvPlugin endPaymentWithFailureMessage:result.TxnMessage];
+        }
+    } else if([result.TxnExists isEqualToString:@"1"]) {
+        // Transaction not found in eGHL system. Assume user cancelled.
+        [self.cdvPlugin endPaymentWithCancellation];
+    } else if([result.TxnExists isEqualToString:@"2"]) {
+        // Failed to query.
+        if(shouldRequery) {
+            [self performRequery];
+        } else {
+            [self.cdvPlugin endPaymentWithFailureMessage:result.TxnMessage];
+        }
+    } else {
+        // Unknown TxnExists value.
+        [self.cdvPlugin endPaymentWithFailureMessage:result.TxnMessage];
+    }
+}
+
+- (void)performRequery
+{
+    EGHLPayment *queryEghlpay = [[EGHLPayment alloc] init];
+    [queryEghlpay EGHLRequestQuery:self.paymentParams
+                  successBlock:^(PaymentRespPARAM* result) {
+                      [self processResults:result withRequery:NO];
+                  }
+                  failedBlock:^(NSString *errorCode, NSString *errorData) {
+                      [self.cdvPlugin endPaymentWithCancellation];
+                  }];
 }
 
 
@@ -105,21 +168,7 @@
 
 - (void)QueryResult: (PaymentRespPARAM*)result
 {
-    if(    !result.TxnExists
-        || ![result.TxnExists isEqualToString:@"0"]
-        || !result.TxnStatus
-    ) {
-        [self.cdvPlugin endPaymentWithFailureMessage:result.TxnMessage];
-    } else {
-        if([result.TxnStatus isEqualToString:@"0"]) {
-            [self.cdvPlugin endPaymentSuccessfullyWithResult:result];
-        } else {
-            // 1 == Failed payment
-            // 2 == Pending payment, not supposed to happen unless user cancels
-            //      payment using our "Cancel" button.
-            [self.cdvPlugin endPaymentWithFailureMessage:result.TxnMessage];
-        }
-    }
+    [self processResults:result withRequery:YES];
 }
 
 @end
