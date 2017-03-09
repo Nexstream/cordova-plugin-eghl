@@ -105,7 +105,21 @@
 
 - (void)QueryResult: (PaymentRespPARAM*)result
 {
-    // TODO
+    if(    !result.TxnExists
+        || ![result.TxnExists isEqualToString:@"0"]
+        || !result.TxnStatus
+    ) {
+        [self.cdvPlugin endPaymentWithFailureMessage:result.TxnMessage];
+    } else {
+        if([result.TxnStatus isEqualToString:@"0"]) {
+            [self.cdvPlugin endPaymentSuccessfullyWithResult:result];
+        } else {
+            // 1 == Failed payment
+            // 2 == Pending payment, not supposed to happen unless user cancels
+            //      payment using our "Cancel" button.
+            [self.cdvPlugin endPaymentWithFailureMessage:result.TxnMessage];
+        }
+    }
 }
 
 @end

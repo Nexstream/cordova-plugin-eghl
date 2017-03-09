@@ -1,10 +1,5 @@
 #import <Cordova/CDV.h>
-
-typedef enum {
-    PAYMENT_SUCCESSFUL = 100,
-    PAYMENT_FAILED,
-    PAYMENT_CANCELLED
-} PaymentStatus;
+#import "EGHLPayment.h"
 
 @interface EGHL : CDVPlugin
 
@@ -12,7 +7,7 @@ typedef enum {
 
 - (void)makePayment: (CDVInvokedUrlCommand*)command;
 
-- (void)endPaymentWithStatus: (PaymentStatus)status;
+- (void)endPaymentSuccessfullyWithResult: (PaymentRespPARAM*)result;
 - (void)endPaymentWithFailureMessage: (NSString*)message;
 - (void)endPaymentWithCancellation;
 

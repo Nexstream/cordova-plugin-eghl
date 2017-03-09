@@ -115,21 +115,13 @@
 
 #pragma mark - Return to JS methods
 
-- (void)endPaymentWithStatus: (PaymentStatus)status
+- (void)endPaymentSuccessfullyWithResult: (PaymentRespPARAM*)result
 {
     [self dismissContentView];
 
-    // TODO return meaningful value to JS
-    switch(status) {
-        case PAYMENT_SUCCESSFUL:
-            break;
-        case PAYMENT_FAILED:
-            // [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:errorData]
-            //                                 callbackId:[self.command callbackId]];
-            break;
-        case PAYMENT_CANCELLED:
-            break;
-    }
+    // TODO send some fields e.g. TxnID, AuthCode, etc back to JS
+    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK]
+                          callbackId:[self.command callbackId]];
 }
 
 - (void)endPaymentWithFailureMessage: (NSString*)message
