@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-        id="my.com.nexstream.cordovaplugins.eghl" version="1.0.0">
+        id="cordova-plugin-eghl" version="1.0.0">
 <!--my.com.nexstream.cordovaPlugins;-->
     <engines>
         <engine name="cordova" version=">=3.0.0" />
@@ -17,10 +17,12 @@
     </js-module>
 
     <platform name="android">
+        <framework src="build-extras-eghl.gradle" custom="true" type="gradleReference" />
         <framework src="com.android.support:support-compat:25.0.1" />
         <config-file target="res/xml/config.xml" parent="/*">
+            <preference name="android-minSdkVersion" value="17" />
             <feature name="eGHL">
-                <param name="android-package" value="my.com.nexstream.cordovaPlugins.EGHL"/>
+                <param name="android-package" value="my.com.nexstream.cordovaPlugins.eGHLPay"/>
             </feature>
             <access origin="https://test2pay.ghl.com" />
             <access origin="https://*" /><!-- Bank websites... -->
@@ -29,12 +31,17 @@
             <uses-permission android:name="android.permission.INTERNET" />
             <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
         </config-file>
+
         <config-file target="AndroidManifest.xml" parent="application">
-            <activity android:name="my.com.nexstream.cordovaPlugins.EGHLStart" android:configChanges="orientation|screenSize" />
+            <meta-data android:name="com.epay.eghl.sdk.PAYMENT_GATEWAY"
+                android:value="https://test2pay.ghl.com/IPGSG/Payment.aspx"/>
+            <meta-data android:name="com.epay.eghl.sdk.PASSWORD"
+                android:value="sit12345"/>
         </config-file>
-        <source-file src="android/EGHLStart.java" target-dir="src/my/com/nexstream/cordovaPlugins" />
-        <source-file src="android/EGHL.java" target-dir="src/my/com/nexstream/cordovaPlugins" />
-        <source-file src="android/eghl-sdk-v1.4.5.jar" target-dir="libs" />
+
+        <source-file src="android/eGHLPay.java" target-dir="src/my/com/nexstream/cordovaPlugins" />
+        <source-file src="android/EghlPayment.java" target-dir="src/my/com/nexstream/cordovaPlugins" />
+        <source-file src="android/eghl-sdk-v2.1.0.aar" target-dir="libs" />
     </platform>
 
     <platform name="ios">
@@ -45,6 +52,14 @@
             <access origin="https://test2pay.ghl.com" />
             <access origin="https://*" />
         </config-file>
+
+        <config-file target="*-Info.plist" parent="RealHost">
+            <false/>
+        </config-file>
+        <config-file target="*-Info.plist" parent="ServicePassword">
+            <string>tgv12345</string>
+        </config-file>
+
 
         <resource-file src="ios/eghl-sdk/guidehandicon.png" />
         <header-file src="ios/eghl-sdk/EGHLPayment.h" />
