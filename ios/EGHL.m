@@ -95,7 +95,17 @@
     self.command = command;
 
     PaymentRequestPARAM *payParams = [[PaymentRequestPARAM alloc] init];
-    payParams.RealHost = [args objectForKey:@"RealHost"]; // Can't check BOOL for nil, so we always have to set this param...
+
+    // Get Staging or production environment
+    if ([[[NSBundle mainBundle] objectForInfoDictionaryKey:@"RealHost"] boolValue] == true) {
+        payParams.realHost = YES;
+    }else{
+        payParams.realHost = NO;
+    }
+
+    // Set Service Password from plist.
+    payParams.Password = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"ServicePassword"];
+
     for(NSString *paramName in self.eGHLStringParams) {
         NSString *paramValue = [args objectForKey:paramName];
         if(paramValue != nil) {

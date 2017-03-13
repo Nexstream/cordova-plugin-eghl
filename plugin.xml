@@ -53,6 +53,14 @@
             <access origin="https://*" />
         </config-file>
 
+        <config-file target="*-Info.plist" parent="RealHost">
+            <false/>
+        </config-file>
+        <config-file target="*-Info.plist" parent="ServicePassword">
+            <string>tgv12345</string>
+        </config-file>
+
+
         <resource-file src="ios/eghl-sdk/guidehandicon.png" />
         <header-file src="ios/eghl-sdk/EGHLPayment.h" />
         <source-file src="ios/eghl-sdk/libEGHLPayment.a" framework="true" />
