@@ -112,7 +112,7 @@ public class eGHLPay extends CordovaPlugin {
                 .setTokenType(eghlPayParams.getTokenType())
                 .setTransactionType(eghlPayParams.getTransactionType())
                 .setPaymentMethod(eghlPayParams.getPaymentMethod())
-                .setPaymentTimeout(8*60)
+                .setPaymentTimeout(eghlPayParams.getPaymentTimeout())
                 .setPaymentId(eghlPayParams.getPaymentId())
                 .setOrderNumber(eghlPayParams.getOrderNumber());
 
