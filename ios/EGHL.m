@@ -128,6 +128,7 @@
 - (void)endPaymentSuccessfullyWithResult: (PaymentRespPARAM*)result
 {
     [self dismissContentView];
+    self.paymentInProgress = NO;
 
     // TODO send some fields e.g. TxnID, AuthCode, etc back to JS
     [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK]
@@ -137,7 +138,7 @@
 - (void)endPaymentWithFailureMessage: (NSString*)message
 {
     [self dismissContentView];
-
+    self.paymentInProgress = NO;
     [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:message]
                           callbackId:[self.command callbackId]];
 }
@@ -148,6 +149,7 @@
 
     [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"cancelled"]
                           callbackId:[self.command callbackId]];
+    self.paymentInProgress = NO;
 }
 
 
