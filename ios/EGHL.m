@@ -146,10 +146,10 @@
 - (void)endPaymentWithCancellation
 {
     [self dismissContentView];
-
-    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"cancelled"]
-                          callbackId:[self.command callbackId]];
     self.paymentInProgress = NO;
+    // TMP hard code -999 as cancel payment. (follow android SDK.)
+    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsInt:-999]
+                          callbackId:[self.command callbackId]];
 }
 
 
