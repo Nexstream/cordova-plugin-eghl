@@ -58,11 +58,11 @@ public class EghlPayment {
     private String merchantName = "";
     @SerializedName("CustMac")
     private String custMac = "";
-    @SerializedName("MerchantCallBackURL")
+    @SerializedName("MerchantApprovalUrl")
     private String merchantApprovalUrl = "";
     @SerializedName("MerchantUnapprovalURL")
     private String merchantUnapprovalUrl = "";
-    @SerializedName("MerchantCallbackURL")
+    @SerializedName("MerchantCallBackURL")
     private String merchantCallbackUrl = "";
     @SerializedName("LanguageCode")
     private String languageCode = "";
