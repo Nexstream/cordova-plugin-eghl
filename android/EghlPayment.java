@@ -24,109 +24,109 @@ import com.google.gson.annotations.SerializedName;
 
 public class EghlPayment {
 
-    @SerializedName("currencyCode")
+    @SerializedName("CurrencyCode")
     private String currencyCode = "";
-    @SerializedName("paymentMethod")
+    @SerializedName("PymtMethod")
     private String paymentMethod = "";
-    @SerializedName("transactionType")
+    @SerializedName("TransactionType")
     private String transactionType = "";
-    @SerializedName("serviceId")
+    @SerializedName("ServiceID")
     private String serviceId = "";
-    @SerializedName("paymentId")
+    @SerializedName("PaymentID")
     private String paymentId = "";
-    @SerializedName("orderNumber")
+    @SerializedName("OrderNumber")
     private String orderNumber = "";
-    @SerializedName("paymentDesc")
+    @SerializedName("PaymentDesc")
     private String paymentDesc = "";
-    @SerializedName("merchantReturnUrl")
+    @SerializedName("MerchantReturnURL")
     private String merchantReturnUrl = "";
     @SerializedName("Amount")
     private String amount = "";
-    @SerializedName("custIp")
+    @SerializedName("CustIp")
     private String custIp = "";
-    @SerializedName("custName")
+    @SerializedName("CustName")
     private String custName = "";
-    @SerializedName("custEmail")
+    @SerializedName("CustEmail")
     private String custEmail = "";
-    @SerializedName("custPhone")
+    @SerializedName("CustPhone")
     private String custPhone = "";
-    @SerializedName("b4TaxAmt")
+    @SerializedName("B4TaxAmt")
     private String b4TaxAmt = "";
-    @SerializedName("taxAmt")
+    @SerializedName("TaxAmt")
     private String taxAmt = "";
-    @SerializedName("merchantName")
+    @SerializedName("MerchantName")
     private String merchantName = "";
-    @SerializedName("custMac")
+    @SerializedName("CustMac")
     private String custMac = "";
-    @SerializedName("merchantApprovalUrl")
+    @SerializedName("MerchantCallBackURL")
     private String merchantApprovalUrl = "";
-    @SerializedName("merchantUnapprovalUrl")
+    @SerializedName("MerchantUnapprovalURL")
     private String merchantUnapprovalUrl = "";
-    @SerializedName("merchantCallbackUrl")
+    @SerializedName("MerchantCallbackURL")
     private String merchantCallbackUrl = "";
-    @SerializedName("languageCode")
+    @SerializedName("LanguageCode")
     private String languageCode = "";
-    @SerializedName("pageTimeout")
+    @SerializedName("PageTimeout")
     private String pageTimeout = "";
-    @SerializedName("cardHolder")
+    @SerializedName("CardHolder")
     private String cardHolder = "";
-    @SerializedName("cardNo")
+    @SerializedName("CardNo")
     private String cardNo = "";
-    @SerializedName("cardExp")
+    @SerializedName("CardExp")
     private String cardExp = "";
-    @SerializedName("cardCvv2")
+    @SerializedName("CardCvv2")
     private String cardCvv2 = "";
-    @SerializedName("issuingBank")
+    @SerializedName("IssuingBank")
     private String issuingBank = "";
-    @SerializedName("billAddr")
+    @SerializedName("BillAddr")
     private String billAddr = "";
-    @SerializedName("billPostal")
+    @SerializedName("BillPostal")
     private String billPostal = "";
-    @SerializedName("billCity")
+    @SerializedName("BillCity")
     private String billCity = "";
-    @SerializedName("billRegion")
+    @SerializedName("BillRegion")
     private String billRegion = "";
-    @SerializedName("billCountry")
+    @SerializedName("BillCountry")
     private String billCountry = "";
-    @SerializedName("shipAddr")
+    @SerializedName("ShipAddr")
     private String shipAddr = "";
-    @SerializedName("shipPostal")
+    @SerializedName("ShipPostal")
     private String shipPostal = "";
-    @SerializedName("shipCity")
+    @SerializedName("ShipCity")
     private String shipCity = "";
-    @SerializedName("shipRegion")
+    @SerializedName("ShipRegion")
     private String shipRegion = "";
-    @SerializedName("shipCountry")
+    @SerializedName("ShipCountry")
     private String shipCountry = "";
-    @SerializedName("sessionId")
+    @SerializedName("SessionId")
     private String sessionId = "";
-    @SerializedName("tokenType")
+    @SerializedName("TokenType")
     private String tokenType = "";
-    @SerializedName("token")
+    @SerializedName("Token")
     private String token = "";
-    @SerializedName("param6")
+    @SerializedName("Param6")
     private String param6 = "";
-    @SerializedName("param7")
+    @SerializedName("Param7")
     private String param7 = "";
-    @SerializedName("eppMonth")
+    @SerializedName("EppMonth")
     private String eppMonth = "";
-    @SerializedName("promoCode")
+    @SerializedName("PromoCode")
     private String promoCode = "";
-    @SerializedName("reqToken")
+    @SerializedName("ReqToken")
     private String reqToken = "";
-    @SerializedName("pairingToken")
+    @SerializedName("PairingToken")
     private String pairingToken = "";
-    @SerializedName("reqVerifier")
+    @SerializedName("ReqVerifier")
     private String reqVerifier = "";
-    @SerializedName("pairingVerifier")
+    @SerializedName("PairingVerifier")
     private String pairingVerifier = "";
-    @SerializedName("checkoutResourceURL")
+    @SerializedName("CheckoutResourceURL")
     private String checkoutResourceURL = "";
-    @SerializedName("cardID")
+    @SerializedName("CardID")
     private String cardID = "";
-    @SerializedName("preCheckoutID")
+    @SerializedName("PreCheckoutID")
     private String preCheckoutID = "";
-    @SerializedName("paymentTimeout")
+    @SerializedName("PaymentTimeout")
     private int paymentTimeout = -1;
 
     public String getCustIp() {
