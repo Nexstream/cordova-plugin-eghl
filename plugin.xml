@@ -16,6 +16,9 @@
         <clobbers target="eGHL" />
     </js-module>
 
+    <preference name="GATEWAY" />
+    <preference name="PASSWORD" />
+
     <platform name="android">
         <framework src="build-extras-eghl.gradle" custom="true" type="gradleReference" />
         <framework src="com.android.support:support-compat:25.0.1" />
@@ -34,9 +37,9 @@
 
         <config-file target="AndroidManifest.xml" parent="application">
             <meta-data android:name="com.epay.eghl.sdk.PAYMENT_GATEWAY"
-                android:value="https://test2pay.ghl.com/IPGSG/Payment.aspx"/>
+                android:value="$GATEWAY" />
             <meta-data android:name="com.epay.eghl.sdk.PASSWORD"
-                android:value="sit12345"/>
+                android:value="$PASSWORD" />
         </config-file>
 
         <source-file src="android/eGHLPay.java" target-dir="src/my/com/nexstream/cordovaPlugins" />
@@ -53,11 +56,11 @@
             <access origin="https://*" />
         </config-file>
 
-        <config-file target="*-Info.plist" parent="RealHost">
-            <false/>
+        <config-file target="*-Info.plist" parent="EGHLGateway">
+            <string>$GATEWAY</string>
         </config-file>
-        <config-file target="*-Info.plist" parent="ServicePassword">
-            <string>tgv12345</string>
+        <config-file target="*-Info.plist" parent="EGHLServicePassword">
+            <string>$PASSWORD</string>
         </config-file>
 
 

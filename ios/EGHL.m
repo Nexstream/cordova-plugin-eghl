@@ -97,14 +97,15 @@
     PaymentRequestPARAM *payParams = [[PaymentRequestPARAM alloc] init];
 
     // Get Staging or production environment
-    if ([[[NSBundle mainBundle] objectForInfoDictionaryKey:@"RealHost"] boolValue] == true) {
-        payParams.realHost = YES;
-    }else{
+    NSString *gateway = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"EGHLGateway"];
+    if ([gateway isEqualToString:@"https://test2pay.ghl.com/IPGSG/Payment.aspx"]) {
         payParams.realHost = NO;
+    }else{
+        payParams.realHost = YES;
     }
 
     // Set Service Password from plist.
-    payParams.Password = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"ServicePassword"];
+    payParams.Password = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"EGHLServicePassword"];
 
     for(NSString *paramName in self.eGHLStringParams) {
         NSString *paramValue = [args objectForKey:paramName];
