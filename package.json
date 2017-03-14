@@ -1,0 +1,24 @@
+{
+  "name": "cordova-plugin-eghl",
+  "version": "1.0.0",
+  "description": "Cordova plugin to integrate eGHL payment gateway's native SDK",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nexstream/cordova-plugin-eghl.git"
+  },
+  "keywords": [
+    "payment",
+    "gateway",
+    "eghl",
+    "ghl"
+  ],
+  "author": "Nexstream Sdn Bhd <info@appxtream.com>",
+  "license": "Apache License 2.0 <http://www.apache.org/licenses/>",
+  "bugs": {
+    "url": "https://github.com/Nexstream/cordova-plugin-eghl/issues"
+  },
+  "homepage": "https://github.com/Nexstream/cordova-plugin-eghl#readme"
+}
