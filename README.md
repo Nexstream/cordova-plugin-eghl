@@ -1,5 +1,5 @@
-Nexstream-eGHL
-==============
+Nexstream eGHL Cordova Plugin
+=============================
 
 Cordova Library for integrating with the eGHL payment gateway's mobile SDK.
 
@@ -7,7 +7,7 @@ Cordova Library for integrating with the eGHL payment gateway's mobile SDK.
 Installation
 ------------
 
-`cordova plugin add my.com.nexstream.cordovaplugins.eghl`
+`cordova plugin add cordova-plugin-eghl`
 
 
 
