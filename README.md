@@ -7,8 +7,11 @@ Cordova Library for integrating with the eGHL payment gateway's mobile SDK.
 Installation
 ------------
 
-`cordova plugin add cordova-plugin-eghl`
-
+```
+cordova plugin add cordova-plugin-eghl \
+    --variable GATEWAY=<Gateway-URL-From-eGHL> \
+    --variable PASSWORD=<eGHL-Merchant-Account-Password-From-eGHL>
+```
 
 
 Usage
