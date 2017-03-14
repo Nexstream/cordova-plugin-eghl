@@ -22,7 +22,9 @@ eGHL.makePayment(
 
         * transactionType, paymentMethod, serviceId, paymentId, orderNumber, paymentDesc,
         * merchantReturnUrl, amount, currencyCode, custIp, custName, custEmail, custPhone
-        * ----------------------------------
+
+        * Check the eGHL documentation for parameter names.
+
         * [All Field are defined as String], Except paymentTimeout.
         */
 
@@ -84,16 +86,17 @@ eGHL.makePayment(
     },
     function (resp) {
         // Success callback
-        // resp =
-        //     0 = Transaction successful.
-        //
+        // resp is the resultCode from the Android SDK on Android; undefined on
+        // iOS.
     },
     function (err) {
         // Failure callback
-        // err =
-        //     1 = Transaction failed ||
+        // err is either a string or `-999` on iOS;
+        //     1 = Transaction failed
         //     2 = Transaction Pending
-        //
+        //     -999 = Transaction cancelled
+        //     <other-integer> = The resultCode from eGHL's Android SDK
+        //     "an error message" = error message
     }
 )
 ```
