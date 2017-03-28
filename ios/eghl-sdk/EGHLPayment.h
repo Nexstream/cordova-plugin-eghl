@@ -23,7 +23,10 @@ typedef void (^onErrorCB)(NSString* errorCode,NSString* errorData);
 @interface EGHLPayment : UIView<UIWebViewDelegate>
 
 @property (nonatomic, weak) id <eGHLDelegate> delegate;
+
 @property (nonatomic, strong) UILabel * loadingMessageLabel;
+
++ (NSString *)version;
 
 /**
  *   @method  eGHLMPERequest:(PaymentRequestPARAM *)paymentParam successBlock:(onPaymentResp)success failedBlock:(onErrorCB)failed
@@ -117,48 +120,52 @@ typedef void (^onErrorCB)(NSString* errorCode,NSString* errorData);
  */
 @interface PaymentRequestPARAM : NSObject
 @property BOOL realHost;
-@property (strong, nonatomic) NSString *Amount;
-@property (strong, nonatomic) NSString *PaymentID;
-@property (strong, nonatomic) NSString *OrderNumber;
-@property (strong, nonatomic) NSString *MerchantName;
-@property (strong, nonatomic) NSString *ServiceID;
-@property (strong, nonatomic) NSString *PymtMethod;
-@property (strong, nonatomic) NSString *MerchantReturnURL;
-@property (strong, nonatomic) NSString *CustEmail;
-@property (strong, nonatomic) NSString *Password;
-@property (strong, nonatomic) NSString *CustPhone;
-@property (strong, nonatomic) NSString *CurrencyCode;
-@property (strong, nonatomic) NSString *CustName;
-@property (strong, nonatomic) NSString *LanguageCode;
-@property (strong, nonatomic) NSString *PaymentDesc;
-@property (strong, nonatomic) NSString *PageTimeout;
-@property (strong, nonatomic) NSString *CustIP;
-@property (strong, nonatomic) NSString *MerchantApprovalURL;
-@property (strong, nonatomic) NSString *CustMAC;
-@property (strong, nonatomic) NSString *MerchantUnApprovalURL;
-@property (strong, nonatomic) NSString *CardHolder;
-@property (strong, nonatomic) NSString *CardNo;
-@property (strong, nonatomic) NSString *CardExp;
-@property (strong, nonatomic) NSString *CardCVV2;
-@property (strong, nonatomic) NSString *BillAddr;
-@property (strong, nonatomic) NSString *BillPostal;
-@property (strong, nonatomic) NSString *BillCity;
-@property (strong, nonatomic) NSString *BillRegion;
-@property (strong, nonatomic) NSString *BillCountry;
-@property (strong, nonatomic) NSString *ShipAddr;
-@property (strong, nonatomic) NSString *ShipPostal;
-@property (strong, nonatomic) NSString *ShipCity;
-@property (strong, nonatomic) NSString *ShipRegion;
-@property (strong, nonatomic) NSString *ShipCountry;
-@property (strong, nonatomic) NSString *TokenType;
-@property (strong, nonatomic) NSString *Token;
-@property (strong, nonatomic) NSString *SessionID;
-@property (strong, nonatomic) NSString *IssuingBank;
-@property (strong, nonatomic) NSString *MerchantCallBackURL;
-@property (strong, nonatomic) NSString *B4TaxAmt;
-@property (strong, nonatomic) NSString *TaxAmt;
-@property (strong, nonatomic) NSString *Param6;
-@property (strong, nonatomic) NSString *Param7;
+@property (strong, nonatomic) NSString * Amount;
+@property (strong, nonatomic) NSString * PaymentID;
+@property (strong, nonatomic) NSString * OrderNumber;
+@property (strong, nonatomic) NSString * MerchantName;
+@property (strong, nonatomic) NSString * ServiceID;
+@property (strong, nonatomic) NSString * PymtMethod;
+@property (strong, nonatomic) NSString * MerchantReturnURL;
+@property (strong, nonatomic) NSString * CustEmail;
+@property (strong, nonatomic) NSString * Password;
+@property (strong, nonatomic) NSString * CustPhone;
+@property (strong, nonatomic) NSString * CurrencyCode;
+@property (strong, nonatomic) NSString * CustName;
+@property (strong, nonatomic) NSString * LanguageCode;
+@property (strong, nonatomic) NSString * PaymentDesc;
+@property (strong, nonatomic) NSString * PageTimeout;
+@property (strong, nonatomic) NSString * CustIP;
+@property (strong, nonatomic) NSString * MerchantApprovalURL;
+@property (strong, nonatomic) NSString * CustMAC;
+@property (strong, nonatomic) NSString * MerchantUnApprovalURL;
+@property (strong, nonatomic) NSString * CardHolder;
+@property (strong, nonatomic) NSString * CardNo;
+@property (strong, nonatomic) NSString * CardExp;
+@property (strong, nonatomic) NSString * CardCVV2;
+@property (strong, nonatomic) NSString * BillAddr;
+@property (strong, nonatomic) NSString * BillPostal;
+@property (strong, nonatomic) NSString * BillCity;
+@property (strong, nonatomic) NSString * BillRegion;
+@property (strong, nonatomic) NSString * BillCountry;
+@property (strong, nonatomic) NSString * ShipAddr;
+@property (strong, nonatomic) NSString * ShipPostal;
+@property (strong, nonatomic) NSString * ShipCity;
+@property (strong, nonatomic) NSString * ShipRegion;
+@property (strong, nonatomic) NSString * ShipCountry;
+@property (strong, nonatomic) NSString * TokenType;
+@property (strong, nonatomic) NSString * Token;
+@property (strong, nonatomic) NSString * SessionID;
+@property (strong, nonatomic) NSString * IssuingBank;
+@property (strong, nonatomic) NSString * MerchantCallBackURL;
+@property (strong, nonatomic) NSString * B4TaxAmt;
+@property (strong, nonatomic) NSString * TaxAmt;
+@property (strong, nonatomic) NSString * Param6;
+@property (strong, nonatomic) NSString * Param7;
+
+@property (strong, nonatomic) NSString * EPPMonth;
+@property (strong, nonatomic) NSString * PromoCode;
+
 @property (nonatomic) CGFloat sdkTimeOut;
 
 #pragma mark Masterpass fields
@@ -180,39 +187,48 @@ typedef void (^onErrorCB)(NSString* errorCode,NSString* errorData);
 
 #pragma mark -
 @interface PaymentRespPARAM : NSObject
-@property (strong, nonatomic) NSString *Amount;
-@property (strong, nonatomic) NSString *AuthCode;
-@property (strong, nonatomic) NSString *BankRefNo;
+@property (strong, nonatomic) NSString * Amount;
+@property (strong, nonatomic) NSString * AuthCode;
+@property (strong, nonatomic) NSString * BankRefNo;
 
-@property (strong, nonatomic) NSString *CardExp;
-@property (strong, nonatomic) NSString *CardHolder;
-@property (strong, nonatomic) NSString *CardNoMask;
-@property (strong, nonatomic) NSString *CardType;
+@property (strong, nonatomic) NSString * CardExp;
+@property (strong, nonatomic) NSString * CardHolder;
+@property (strong, nonatomic) NSString * CardNoMask;
+@property (strong, nonatomic) NSString * CardType;
 
-@property (strong, nonatomic) NSString *CurrencyCode;
-@property (strong, nonatomic) NSString *HashValue;
-@property (strong, nonatomic) NSString *HashValue2;
+@property (strong, nonatomic) NSString * CurrencyCode;
 
-@property (strong, nonatomic) NSString *IssuingBank;
+@property (strong, nonatomic) NSString * EPPMonth;
+@property (strong, nonatomic) NSString * EPP_YN;
 
-@property (strong, nonatomic) NSString *OrderNumber;
-@property (strong, nonatomic) NSString *PaymentID;
-@property (strong, nonatomic) NSString *PymtMethod;
-@property (strong, nonatomic) NSString *QueryDesc;
+@property (strong, nonatomic) NSString * HashValue;
+@property (strong, nonatomic) NSString * HashValue2;
 
-@property (strong, nonatomic) NSString *ServiceID;
-@property (strong, nonatomic) NSString *SessionID;
+@property (strong, nonatomic) NSString * IssuingBank;
+@property (strong, nonatomic) NSString * OrderNumber;
 
-@property (strong, nonatomic) NSString *TotalRefundAmount;
+@property (strong, nonatomic) NSString * PromoCode;
+@property (strong, nonatomic) NSString * PromoOriAmt;
+@property (strong, nonatomic) NSString * Param6;
+@property (strong, nonatomic) NSString * Param7;
+@property (strong, nonatomic) NSString * PaymentID;
+@property (strong, nonatomic) NSString * PymtMethod;
 
-@property (strong, nonatomic) NSString *TransactionType;
-@property (strong, nonatomic) NSString *TxnExists;
-@property (strong, nonatomic) NSString *TxnID;
-@property (strong, nonatomic) NSString *TxnMessage;
-@property (strong, nonatomic) NSString *TxnStatus;
+@property (strong, nonatomic) NSString * QueryDesc;
 
-@property (strong, nonatomic) NSString *TokenType;
-@property (strong, nonatomic) NSString *Token;
+@property (strong, nonatomic) NSString * ServiceID;
+@property (strong, nonatomic) NSString * SessionID;
+@property (strong, nonatomic) NSString * SettleTAID;
+
+@property (strong, nonatomic) NSString * TID;
+@property (strong, nonatomic) NSString * TotalRefundAmount;
+@property (strong, nonatomic) NSString * Token;
+@property (strong, nonatomic) NSString * TokenType;
+@property (strong, nonatomic) NSString * TransactionType;
+@property (strong, nonatomic) NSString * TxnExists;
+@property (strong, nonatomic) NSString * TxnID;
+@property (strong, nonatomic) NSString * TxnMessage;
+@property (strong, nonatomic) NSString * TxnStatus;
 
 //---------------
 #pragma mark Masterpass fields
@@ -222,4 +238,6 @@ typedef void (^onErrorCB)(NSString* errorCode,NSString* errorData);
 
 @property (strong, nonatomic) NSString * PreCheckoutId;
 @property (strong, nonatomic) NSArray * Cards;
+
+@property (nonatomic, strong) NSDictionary * mpLightboxError;
 @end
