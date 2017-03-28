@@ -126,7 +126,7 @@ necessary (at most one requery before giving up and failing).
             [self.cdvPlugin endPaymentSuccessfullyWithResult:result];
         } else if([result.TxnStatus isEqualToString:@"1"]) {
             // Transaction failed.
-            [self.cdvPlugin endPaymentSuccessfullyWithResult:result];
+            [self.cdvPlugin endPaymentWithFailureMessage:result.TxnMessage];
         } else if([result.TxnStatus isEqualToString:@"2"]) {
             if(shouldRequery) {
                 // Transaction pending and should requery.
