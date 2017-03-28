@@ -112,11 +112,15 @@ necessary (at most one requery before giving up and failing).
 
 - (void)processResults: (PaymentRespPARAM*)result withRequery: (BOOL)shouldRequery
 {
-    if(!result.TxnExists || !result.TxnStatus) {
+    if(!result.TxnStatus) {
         // Unexpected nil fields.
+        // TxnExists field will be null most of the time (when eGHL SDK is able
+        // to grab payment response immediately) and may be non-null when eGHL
+        // SDK had to perform a requery.
         [self.cdvPlugin endPaymentWithFailureMessage:result.TxnMessage];
-    } else if([result.TxnExists isEqualToString:@"0"]) {
-        // Transaction exists.
+    } else if(!result.TxnExists || [result.TxnExists isEqualToString:@"0"]) {
+        // Transaction exists, or SDK returned immediate payment response - in
+        // which case we assume transaction exists..
         if([result.TxnStatus isEqualToString:@"0"]) {
             // Transaction successful.
             [self.cdvPlugin endPaymentSuccessfullyWithResult:result];
@@ -135,18 +139,20 @@ necessary (at most one requery before giving up and failing).
             // Unknown status.
             [self.cdvPlugin endPaymentWithFailureMessage:result.TxnMessage];
         }
-    } else if([result.TxnExists isEqualToString:@"1"]) {
-        // Transaction not found in eGHL system. Assume user cancelled.
-        [self.cdvPlugin endPaymentWithCancellation];
-    } else if([result.TxnExists isEqualToString:@"2"]) {
-        // Failed to query.
-        if(shouldRequery) {
-            [self performRequery];
-        } else {
-            [self.cdvPlugin endPaymentWithFailureMessage:result.TxnMessage];
+    } else if(result.TxnExists) {
+        if([result.TxnExists isEqualToString:@"1"]) {
+            // Transaction not found in eGHL system. Assume user cancelled.
+            [self.cdvPlugin endPaymentWithCancellation];
+        } else if([result.TxnExists isEqualToString:@"2"]) {
+            // Failed to query.
+            if(shouldRequery) {
+                [self performRequery];
+            } else {
+                [self.cdvPlugin endPaymentWithFailureMessage:result.TxnMessage];
+            }
         }
     } else {
-        // Unknown TxnExists value.
+        // Unknown TxnExists value or nil.
         [self.cdvPlugin endPaymentWithFailureMessage:result.TxnMessage];
     }
 }
