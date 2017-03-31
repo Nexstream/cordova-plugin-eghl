@@ -20,6 +20,7 @@ necessary (at most one requery before giving up and failing).
 @property PaymentRequestPARAM *paymentParams;
 @property EGHLPayment *eghlpay;
 @property EGHL *cdvPlugin;
+@property BOOL hasCancelled;
 
 @end
 
@@ -31,6 +32,7 @@ necessary (at most one requery before giving up and failing).
 @synthesize paymentParams;
 @synthesize eghlpay;
 @synthesize cdvPlugin;
+@synthesize hasCancelled;
 
 
 #pragma mark - Init
@@ -43,6 +45,7 @@ necessary (at most one requery before giving up and failing).
         self.paymentParams = payment;
         self.eghlpay = [[EGHLPayment alloc] init];
         self.eghlpay.delegate = self;
+        self.hasCancelled = false;
     }
     return self;
 }
@@ -82,15 +85,17 @@ necessary (at most one requery before giving up and failing).
 
 - (void)cancelPaymentPressed: (id)sender
 {
-    UIAlertView * alertExit =
-        [[UIAlertView alloc] initWithTitle:@"Are you sure?"
-                             message:@"Pressing Abort will abandon the payment session."
-                             delegate:self
-                             cancelButtonTitle:@"Continue with Payment"
-                             otherButtonTitles:@"Abort", nil];
+    if(!self.hasCancelled) {
+        UIAlertView * alertExit =
+            [[UIAlertView alloc] initWithTitle:@"Are you sure?"
+                                 message:@"Pressing Abort will abandon the payment session."
+                                 delegate:self
+                                 cancelButtonTitle:@"Continue with Payment"
+                                 otherButtonTitles:@"Abort", nil];
 
-    [alertExit setTag:CANCEL_PAYMENT_TAG];
-    [alertExit show];
+        [alertExit setTag:CANCEL_PAYMENT_TAG];
+        [alertExit show];
+    }
 }
 
 
@@ -98,12 +103,15 @@ necessary (at most one requery before giving up and failing).
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    switch ([alertView tag]) {
-        case CANCEL_PAYMENT_TAG:
-            if(buttonIndex == 1) {
-                [self performRequery];
-            }
-            break;
+    if(!self.hasCancelled) {
+        switch ([alertView tag]) {
+            case CANCEL_PAYMENT_TAG:
+                if(buttonIndex == 1) {
+                    self.hasCancelled = true;
+                    [self.eghlpay finalizeTransaction];
+                }
+                break;
+        }
     }
 }
 
