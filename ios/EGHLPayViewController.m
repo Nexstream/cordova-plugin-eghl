@@ -125,8 +125,13 @@ necessary (at most one requery before giving up and failing).
             // Transaction successful.
             [self.cdvPlugin endPaymentSuccessfullyWithResult:result];
         } else if([result.TxnStatus isEqualToString:@"1"]) {
-            // Transaction failed.
-            [self.cdvPlugin endPaymentWithFailureMessage:result.TxnMessage];
+            if(result.TxnMessage && [result.TxnMessage isEqualToString:@"Buyer cancelled"]) {
+                // Transaction cancelled.
+                [self.cdvPlugin endPaymentWithCancellation];
+            } else {
+                // Transaction failed.
+                [self.cdvPlugin endPaymentWithFailureMessage:result.TxnMessage];
+            }
         } else if([result.TxnStatus isEqualToString:@"2"]) {
             if(shouldRequery) {
                 // Transaction pending and should requery.
