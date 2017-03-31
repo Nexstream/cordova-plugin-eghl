@@ -133,7 +133,10 @@ necessary (at most one requery before giving up and failing).
             // Transaction successful.
             [self.cdvPlugin endPaymentSuccessfullyWithResult:result];
         } else if([result.TxnStatus isEqualToString:@"1"]) {
-            if(result.TxnMessage && [result.TxnMessage isEqualToString:@"Buyer\%20cancelled"]) {
+            if( result.TxnMessage &&
+                ([result.TxnMessage isEqualToString:@"Buyer cancelled"] ||
+                 [result.TxnMessage isEqualToString:@"Buyer\%20cancelled"])
+            ) {
                 // Transaction cancelled.
                 [self.cdvPlugin endPaymentWithCancellation];
             } else {
