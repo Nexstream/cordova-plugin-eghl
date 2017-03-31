@@ -105,6 +105,12 @@ typedef void (^onErrorCB)(NSString* errorCode,NSString* errorData);
  */
 - (void)SaleViewStopLoad;
 
+/*
+ *   @method  finalizeTransaction
+ *
+ *   @discussion    request SDK to finalize the current Transaction.
+ */
+- (void)finalizeTransaction;
 @end
 
 #pragma mark -
