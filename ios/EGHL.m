@@ -7,7 +7,7 @@
 @interface EGHL ()
 
 @property Boolean paymentInProgress;
-@property UIViewController *contentViewController;
+@property UINavigationController *contentViewController;
 @property CDVInvokedUrlCommand* command;
 @property NSArray *eGHLStringParams;
 
@@ -118,6 +118,7 @@
         [[EGHLPayViewController alloc] initWithEGHLPlugin:self
                                        andPayment:payParams];
     self.contentViewController = [[UINavigationController alloc] initWithRootViewController:payViewController];
+    self.contentViewController.delegate = self;
     [self.viewController presentViewController:self.contentViewController
                          animated:YES
                          completion:^(void){}];
@@ -153,6 +154,13 @@
                           callbackId:[self.command callbackId]];
 }
 
+
+#pragma mark - UINavigationControllerDelegate
+
+- (UIInterfaceOrientationMask)navigationControllerSupportedInterfaceOrientations: (UINavigationController*)navigationController;
+{
+    return UIInterfaceOrientationMaskPortrait;
+}
 
 #pragma mark - Internal helpers
 

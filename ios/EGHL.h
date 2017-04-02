@@ -1,7 +1,7 @@
 #import <Cordova/CDV.h>
 #import "EGHLPayment.h"
 
-@interface EGHL : CDVPlugin
+@interface EGHL : CDVPlugin <UINavigationControllerDelegate>
 
 - (void)pluginInitialize;
 
