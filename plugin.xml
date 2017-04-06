@@ -44,7 +44,7 @@
 
         <source-file src="android/eGHLPay.java" target-dir="src/my/com/nexstream/cordovaPlugins" />
         <source-file src="android/EghlPayment.java" target-dir="src/my/com/nexstream/cordovaPlugins" />
-        <source-file src="android/eghl-sdk-v2.1.6.aar" target-dir="libs" />
+        <source-file src="android/eghl-sdk-v2.1.7.aar" target-dir="libs" />
     </platform>
 
     <platform name="ios">
