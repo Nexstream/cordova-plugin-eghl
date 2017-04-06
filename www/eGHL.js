@@ -15,16 +15,12 @@ eGHL.prototype = {
         exec(
             success,
             function (err) {
-                if(cordova.platformId != 'android') {
+                if(typeof err != 'string') error(err)
+                else {
+                    // eGHL Android SDK's TxnMessage is escaped.
+                    err = decodeURIComponent(err)
+                    err = err.replace(/\+/g, " ")
                     error(err)
-                } else {
-                    if(typeof err != 'string') error(err)
-                    else {
-                        // eGHL Android SDK's TxnMessage is escaped.
-                        err = decodeURIComponent(err)
-                        err = err.replace(/\+/g, " ")
-                        error(err)
-                    }
                 }
             },
             'eGHL',
