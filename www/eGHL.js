@@ -5,7 +5,7 @@ var argscheck = require('cordova/argscheck'),
 
 var eGHL = function() {
     var name = "eGHL Cordova Plugin";
-    var version = "v0.1"
+    var version = "1.1.0"
 }
 
 eGHL.prototype = {
