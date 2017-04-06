@@ -95,10 +95,12 @@ eGHL.makePayment(
     function (err) {
         // Failure callback
         // err is either a string or `-999` on iOS;
+        // on Android:
         //     1 = Transaction failed
         //     2 = Transaction Pending
         //     -999 = Transaction cancelled
-        //     <other-integer> = The resultCode from eGHL's Android SDK
+        //     <other-integer> = The resultCode from eGHL's Android SDK, if a
+        //          message string was not found.
         //     "an error message" = error message
     }
 )

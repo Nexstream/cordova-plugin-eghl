@@ -40,6 +40,7 @@ public class eGHLPay extends CordovaPlugin {
     {
         if (requestCode == EGHL.REQUEST_PAYMENT) {
             isInProgress = false;
+            String message = data.getStringExtra(EGHL.TXN_MESSAGE);
             switch (resultCode) {
                 case EGHL.TRANSACTION_SUCCESS:
                     Log.d(TAG, "onActivityResult: payment successful");
@@ -47,13 +48,29 @@ public class eGHLPay extends CordovaPlugin {
 
                     break;
                 case EGHL.TRANSACTION_FAILED:
-                    Log.d(TAG, "onActivityResult: payment failure");
-                    cordovaCallbackContext.error(resultCode);
+                    if(message == null) {
+                        Log.d(TAG, "onActivityResult: payment failure");
+                        cordovaCallbackContext.error(resultCode);
+                    } else {
+                        if(message.equals("Buyer cancelled") || message.equals("Buyer%20cancelled")) {
+                            // Detect cancellation like iOS and return -999 (which eGHL SDK
+                            // used to return for user cancellation).
+                            Log.d(TAG, "onActivityResult: payment cancelled");
+                            cordovaCallbackContext.error(-999);
+                        } else {
+                            Log.d(TAG, "onActivityResult: payment failure");
+                            cordovaCallbackContext.error(message);
+                        }
+                    }
 
                     break;
                 default:
                     Log.d(TAG, "onActivityResult: " + resultCode);
-                    cordovaCallbackContext.error(resultCode);
+                    if(message == null) {
+                        cordovaCallbackContext.error(resultCode);
+                    } else {
+                        cordovaCallbackContext.error(message);
+                    }
 
                     break;
             }
