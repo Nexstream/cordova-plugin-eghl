@@ -11,6 +11,7 @@
 @property UINavigationController *contentViewController;
 @property CDVInvokedUrlCommand* command;
 @property NSArray *eGHLStringParams;
+@property NSArray *eGHLStringParams_mpeRequest;
 
 @end
 
@@ -23,6 +24,7 @@
 @synthesize contentViewController;
 @synthesize command;
 @synthesize eGHLStringParams;
+@synthesize eGHLStringParams_mpeRequest;
 
 
 #pragma mark - Plugin API
@@ -74,6 +76,15 @@
             @"Param6",
             @"Param7"
         ];
+
+        self.eGHLStringParams_mpeRequest = @[
+            @"ServiceID",
+            @"CurrencyCode",
+            @"Amount",
+            @"TokenType",
+            @"Token",
+            @"PaymentDesc",
+        ];
     }
 }
 
@@ -118,6 +129,43 @@
     [self.viewController presentViewController:self.contentViewController
                          animated:YES
                          completion:^(void){}];
+}
+
+- (void)mpeRequest: (CDVInvokedUrlCommand*)command
+{
+    NSDictionary *args = (NSDictionary*) [command argumentAtIndex:0 withDefault:nil andClass:[NSDictionary class]];
+    if(args == nil) {
+        [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Argument must be an object."]
+                              callbackId:[command callbackId]];
+        return;
+    }
+
+    PaymentRequestPARAM *params = [[PaymentRequestPARAM alloc] init];
+    params.realHost = [self isRealHost];
+    // Get Service Password from plist.
+    params.Password = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"EGHLServicePassword"];
+    // Get other params from command arguments.
+    for(NSString *paramName in self.eGHLStringParams_mpeRequest) {
+        NSString *paramValue = [args objectForKey:paramName];
+        if(paramValue != nil) {
+            [params setValue:paramValue forKey:paramName];
+        }
+    }
+
+    EGHLPayment *req = [[EGHLPayment alloc] init];
+    [req eGHLMPERequest:params
+         successBlock:^(PaymentRespPARAM *resp) {
+             NSDictionary *dict = [self objectAsDictionary:resp];
+             [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK
+                                                                     messageAsDictionary:dict]
+                                   callbackId:[command callbackId]];
+         }
+         failedBlock:^(NSString *errorCode, NSString *errorData) {
+             NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:errorCode, @"errorCode", errorData, @"errorData", nil];
+             [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
+                                                                     messageAsDictionary:dict]
+                                   callbackId:[command callbackId]];
+         }];
 }
 
 

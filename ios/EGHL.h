@@ -6,6 +6,7 @@
 - (void)pluginInitialize;
 
 - (void)makePayment: (CDVInvokedUrlCommand*)command;
+- (void)mpeRequest: (CDVInvokedUrlCommand*)command;
 
 - (void)endPaymentSuccessfullyWithResult: (PaymentRespPARAM*)result;
 - (void)endPaymentWithFailureMessage: (NSString*)message;

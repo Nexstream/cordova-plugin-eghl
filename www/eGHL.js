@@ -27,7 +27,13 @@ eGHL.prototype = {
             'makePayment',
             [params]
         );
-    }
+    },
+
+    mpeRequest: function (params, success, error)
+    {
+        argscheck.checkArgs('ofF', 'eGHL.mpeRequest', arguments);
+        exec(success, error, 'eGHL', 'mpeRequest', [params]);
+    },
 };
 
 module.exports = new eGHL();
