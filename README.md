@@ -8,9 +8,7 @@ Installation
 ------------
 
 ```
-cordova plugin add cordova-plugin-eghl \
-    --variable GATEWAY=<Gateway-URL-From-eGHL> \
-    --variable PASSWORD=<eGHL-Merchant-Account-Password-From-eGHL>
+cordova plugin add cordova-plugin-eghl
 ```
 
 
@@ -39,7 +37,11 @@ eGHL.makePayment(
         CurrencyCode : "MYR" | ...
         PaymentMethod : "ANY" | "AUTH"
         TransactionType : "SALE"
+
+        PaymentGateway: "https://..." // Payment gateway URL given by eGHL
         ServiceId : "abc" //Merchant Code or Service ID given by eGHL
+        Password: "password" // Merchant password given by eGHL
+
         PaymentId : "P0000001" // Unique string for each payment
         OrderNumber : "P0000001" // Order number to refer current payment, can duplicate.
         PaymentDesc : "eGHL Payment testing"

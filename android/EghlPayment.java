@@ -30,8 +30,12 @@ public class EghlPayment {
     private String paymentMethod = "";
     @SerializedName("TransactionType")
     private String transactionType = "";
+    @SerializedName("PaymentGateway")
+    private String paymentGateway = "";
     @SerializedName("ServiceID")
     private String serviceId = "";
+    @SerializedName("Password")
+    private String password = "";
     @SerializedName("PaymentID")
     private String paymentId = "";
     @SerializedName("OrderNumber")
@@ -161,12 +165,28 @@ public class EghlPayment {
         this.transactionType = transactionType;
     }
 
+    public String getPaymentGateway() {
+        return paymentGateway;
+    }
+
+    public void setPaymentGateway(String paymentGateway) {
+        this.paymentGateway = paymentGateway;
+    }
+
     public String getServiceId() {
         return serviceId;
     }
 
     public void setServiceId(String serviceId) {
         this.serviceId = serviceId;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getPaymentId() {
