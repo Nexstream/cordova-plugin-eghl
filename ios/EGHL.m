@@ -1,5 +1,6 @@
 #import "EGHL.h"
 #import "EGHLPayViewController.h"
+#import <objc/runtime.h>
 
 
 #pragma mark - "Private" variables
@@ -169,6 +170,27 @@
 {
     NSString *gateway = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"EGHLGateway"];
     return ![gateway isEqualToString:@"https://test2pay.ghl.com/IPGSG/Payment.aspx"];
+}
+
+// Get all non-nil fields in an NSObject and returns them in an NSDictionary.
+// http://stackoverflow.com/a/31181746
+- (NSDictionary*)objectAsDictionary: (NSObject*)object {
+    // Get a list of all properties in the class.
+    unsigned int count = 0;
+    objc_property_t *properties = class_copyPropertyList([object class], &count);
+
+    NSMutableDictionary *dictionary = [[NSMutableDictionary alloc] initWithCapacity:count];
+    for(int i=0; i<count; i++) {
+        NSString *key = [NSString stringWithUTF8String:property_getName(properties[i])];
+        NSString *value = [object valueForKey:key];
+
+        // Only add to the NSDictionary if it's not nil.
+        if (value) [dictionary setObject:value forKey:key];
+    }
+
+    free(properties);
+
+    return dictionary;
 }
 
 @end
