@@ -32,7 +32,15 @@ eGHL.prototype = {
     mpeRequest: function (params, success, error)
     {
         argscheck.checkArgs('ofF', 'eGHL.mpeRequest', arguments);
-        exec(success, error, 'eGHL', 'mpeRequest', [params]);
+        exec(function (resp) {
+            if(cordova.platformId == 'android') {
+                // Android returns a string. We need to parse it ourselves.
+                // In fact after parsing, we may find this is an error response.
+                success(resp) // TODO
+            } else {
+                success(resp)
+            }
+        }, error, 'eGHL', 'mpeRequest', [params]);
     },
 };
 

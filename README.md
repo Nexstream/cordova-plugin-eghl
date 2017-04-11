@@ -168,12 +168,9 @@ eGHL.mpeRequest(
         //          ]
         //      }
     },
-    function (resp) {
+    function (errMsg) {
         // Error callback
-        // resp: {
-        //      errorCode: "...",
-        //      errorData: "..."
-        // }
+        // errMsg: "error string"
     }
 );
 ```
