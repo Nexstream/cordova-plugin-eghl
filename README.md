@@ -17,6 +17,10 @@ cordova plugin add cordova-plugin-eghl \
 Usage
 -----
 
+### Request payment
+
+To request payment via any channel, including Masterpass Express:
+
 ```javascript
 eGHL.makePayment(
     {
@@ -103,5 +107,69 @@ eGHL.makePayment(
         //          message string was not found.
         //     "an error message" = error message
     }
-)
+);
+```
+
+
+### Masterpass Express info
+
+```javascript
+eGHL.mpeRequest(
+    {
+        "ServiceID": "abc", // merchant ID provided by eGHL
+        "CurrencyCode": "MYR",
+        "Amount": "123.10",
+        "TokenType": "MPE / MSC", // MPE = Masterpass Express, MSC = Masterpass Standard
+            // Checkout.
+        "Token": "User identifier, for TokenType==MPE only",
+        "PaymentDesc": "Payment description...",
+    },
+    function (resp) {
+        // Success callback
+        // resp can take one of two forms, based on whether the user was already
+        // paired with Masterpass Express or not.
+        // 1. Not paired:
+        //      {
+        //          "ReqToken": "...",
+        //          "PairingToken": "..."
+        //      }
+        // 2. Already paired:
+        //      {
+        //          "PreCheckoutId": "...",
+        //          "Cards": [
+        //              {
+        //                  "LastFour": "0014",
+        //                  "CardId": "358f9812-a99a-49d9-9385- f0a7b67e377c",
+        //                  "BrandId": "master",
+        //                  "CardAlias": null,
+        //                  "ExpiryMonth": 12,
+        //                  "SelectedAsDefault": true,
+        //                  "BNBUnverified": null,
+        //                  "CardHolderName": "OM Testing",
+        //                  "ExtensionPoint": null,
+        //                  "BillingAddress": {
+        //                      "City": "KL",
+        //                      "Country": "US",
+        //                      "CountrySubdivision": "WA",
+        //                      "Line1": "123, street 123",
+        //                      "Line2": null,
+        //                      "Line3": null,
+        //                      "PostalCode": "11222",
+        //                      "ExtensionPoint": null
+        //                  },
+        //                  "BrandName": "MasterCard",
+        //                  "ExpiryYear": 2020
+        //              },
+        //              ...
+        //          ]
+        //      }
+    },
+    function (resp) {
+        // Error callback
+        // resp: {
+        //      errorCode: "...",
+        //      errorData: "..."
+        // }
+    }
+);
 ```
