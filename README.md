@@ -118,7 +118,9 @@ eGHL.makePayment(
 ```javascript
 eGHL.mpeRequest(
     {
+        "PaymentGateway": "https://..." // payment gateway URL provided by eGHL
         "ServiceID": "abc", // merchant ID provided by eGHL
+        "Password": "password" // merchant password provided by eGHL
         "CurrencyCode": "MYR",
         "Amount": "123.10",
         "TokenType": "MPE / MSC", // MPE = Masterpass Express, MSC = Masterpass Standard
