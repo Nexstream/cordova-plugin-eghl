@@ -35,7 +35,7 @@ eGHL.makePayment(
         CurrencyCode : "MYR" | ...
         PaymentMethod : "ANY" | "AUTH"
         TransactionType : "SALE"
-        ServiceId : "sit" //Merchant Code or Service ID given by eGHL
+        ServiceId : "abc" //Merchant Code or Service ID given by eGHL
         PaymentId : "P0000001" // Unique string for each payment
         OrderNumber : "P0000001" // Order number to refer current payment, can duplicate.
         PaymentDesc : "eGHL Payment testing"
