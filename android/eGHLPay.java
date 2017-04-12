@@ -113,9 +113,9 @@ public class eGHLPay extends CordovaPlugin {
                 EghlPayment arg0 = new Gson().fromJson(args.getJSONObject(0).toString(), EghlPayment.class);
 
                 MasterpassParams.Builder params = new MasterpassParams.Builder();
-                params.setPaymentGateway(arg0.getPaymentGateway())
+                params.setPaymentGateway(arg0.getPaymentGateway());
                 params.setServiceID(arg0.getServiceId());
-                params.setPassword(arg0.getPassword())
+                params.setPassword(arg0.getPassword());
                 params.setCurrencyCode(arg0.getCurrencyCode());
                 params.setAmount(arg0.getAmount());
                 params.setTokenType(arg0.getTokenType());
