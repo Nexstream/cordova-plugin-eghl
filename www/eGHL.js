@@ -4,9 +4,9 @@ var argscheck = require('cordova/argscheck'),
     exec      = require('cordova/exec');
 
 var eGHL = function() {
-    var name = "eGHL Cordova Plugin";
-    var version = "1.1.0"
-}
+    var name = 'eGHL Cordova Plugin';
+    var version = '1.1.0'
+};
 
 eGHL.prototype = {
     makePayment: function(params, success, error)
