@@ -36,12 +36,61 @@ eGHL.prototype = {
             if(cordova.platformId == 'android') {
                 // Android returns a string. We need to parse it ourselves.
                 // In fact after parsing, we may find this is an error response.
-                success(resp) // TODO
+                // SAMPLE SUCCESS:
+                // - "ReqToken=312312io321io3uio12&PairingToken=3213123l1jlkj\r\n"
+                // SAMPLE ERROR:
+                // - ... HTML page with an embedded "href=\"?x=&y=&TxnStatus=1&TxnMessage=some message...\"...
+                try { success(parseAndroidResponse(resp+'')) } // ensure resp is a string
+                catch(e) { error(e.message) }
             } else {
-                success(resp)
+                success(resp);
             }
         }, error, 'eGHL', 'mpeRequest', [params]);
     },
 };
 
 module.exports = new eGHL();
+
+
+// Internal helpers ------------------------------------------------------------
+
+function trim (s)
+{
+    var matches = s.match(/^\s*(.*?)\s*$/);
+    if(matches === null) return '';
+    else return matches[1];
+};
+
+function keyValStringToObject (s)
+{
+    var variables = {};
+    trim(s)
+    .split('&')
+    .forEach(function (part) {
+        if(part != '') {
+            var keyVal = part.split('=');
+            var key, val;
+            if(keyVal.length == 1) {
+                key = part;
+                val = true;
+            } else {
+                key = decodeURIComponent(keyVal[0]);
+                val = decodeURIComponent(keyVal.slice(1).join('='));
+            }
+            variables[key] = val;
+        }
+    })
+    return variables;
+};
+
+function parseAndroidResponse (s)
+{
+    if(s.indexOf('html') >= 0 && /href=".*[?&]TxnMessage=?/.test(s)) {
+        // Error
+        var txnMessage = s.match(/[?&]TxnMessage=([^"&]*)/);
+        if(txnMessage) throw new Error(txnMessage[1]);
+        else throw new Error();
+    } else {
+        return keyValStringToObject(s);
+    }
+};
