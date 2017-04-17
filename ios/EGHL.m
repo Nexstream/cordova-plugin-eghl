@@ -3,6 +3,13 @@
 #import <objc/runtime.h>
 
 
+#pragma mark - eGHL secret debug fields...
+
+@interface PaymentRequestPARAM ()
+- (void)eghlDebugURL: (NSString *)urlString;
+@end
+
+
 #pragma mark - "Private" variables
 
 @interface EGHL ()
