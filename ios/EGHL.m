@@ -61,6 +61,7 @@
             @"BillCity",
             @"BillRegion",
             @"BillCountry",
+            @"eghlDebugURL",
             @"ShipAddr",
             @"ShipPostal",
             @"ShipCity",
@@ -109,7 +110,15 @@
     PaymentRequestPARAM *payParams = [[PaymentRequestPARAM alloc] init];
 
     // Get Staging or production environment
-    payParams.realHost = [self isRealHost:(NSString*)[args objectForKey:@"PaymentGateway"]];
+    NSString *gatewayUrl = [args objectForKey:@"PaymentGateway"];
+    if([gatewayUrl isEqualToString:@"https://test2pay.ghl.com/IPGSGOM/Payment.aspx"]) {
+        // Special Masterpass development gateway... For TEMPORARY usage only!
+        // TMP FIXME Remove when Masterpass is available in the normal
+        // staging/production gateways.
+        [self.paypram eghlDebugURL: @"https://test2pay.ghl.com/IPGSGOM/Payment.aspx"];
+    } else {
+        payParams.realHost = [self isRealHost:gatewayUrl];
+    }
 
     for(NSString *paramName in self.eGHLStringParams) {
         NSString *paramValue = [args objectForKey:paramName];
