@@ -132,6 +132,8 @@ public class EghlPayment {
     private String preCheckoutID = "";
     @SerializedName("PaymentTimeout")
     private int paymentTimeout = -1;
+    @SerializedName("sdkTimeout")
+    private float sdkTimeout = -1;
 
     public String getCustIp() {
         return custIp;
@@ -563,5 +565,13 @@ public class EghlPayment {
 
     public void setPaymentTimeout(int paymentTimeout) {
         this.paymentTimeout = paymentTimeout;
+    }
+
+    public float getSdkTimeout() {
+        return sdkTimeout;
+    }
+
+    public void setSdkTimeout(int sdkTimeout) {
+        this.sdkTimeout = sdkTimeout;
     }
 }

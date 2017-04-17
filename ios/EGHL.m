@@ -127,6 +127,7 @@
         payParams.realHost = [self isRealHost:gatewayUrl];
     }
 
+    payParams.sdkTimeOut = [((NSNumber*) [args objectForKey:@"sdkTimeout"]) doubleValue];
     for(NSString *paramName in self.eGHLStringParams) {
         NSString *paramValue = [args objectForKey:paramName];
         if(paramValue != nil) {
@@ -167,6 +168,7 @@
     }
 
     // Get other params from command arguments.
+    params.sdkTimeOut = [((NSNumber*) [args objectForKey:@"sdkTimeout"]) doubleValue];
     for(NSString *paramName in self.eGHLStringParams_mpeRequest) {
         NSString *paramValue = [args objectForKey:paramName];
         if(paramValue != nil) {

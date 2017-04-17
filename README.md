@@ -91,6 +91,7 @@ eGHL.makePayment(
         CardID : "",
         PreCheckoutID : "",
         PaymentTimeout : -1
+        sdkTimeout: 60 // seconds
 
     },
     function (resp) {
