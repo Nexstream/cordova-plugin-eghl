@@ -115,7 +115,7 @@
         // Special Masterpass development gateway... For TEMPORARY usage only!
         // TMP FIXME Remove when Masterpass is available in the normal
         // staging/production gateways.
-        [self.paypram eghlDebugURL: @"https://test2pay.ghl.com/IPGSGOM/Payment.aspx"];
+        [payParams eghlDebugURL: @"https://test2pay.ghl.com/IPGSGOM/Payment.aspx"];
     } else {
         payParams.realHost = [self isRealHost:gatewayUrl];
     }
@@ -147,7 +147,7 @@
     }
 
     PaymentRequestPARAM *params = [[PaymentRequestPARAM alloc] init];
-    payParams.realHost = [self isRealHost:(NSString*)[args objectForKey:@"PaymentGateway"]];
+    params.realHost = [self isRealHost:gatewayUrl];
     // Get other params from command arguments.
     for(NSString *paramName in self.eGHLStringParams_mpeRequest) {
         NSString *paramValue = [args objectForKey:paramName];
