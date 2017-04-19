@@ -13,6 +13,7 @@ import com.eghl.sdk.interfaces.MasterpassCallback;
 import com.eghl.sdk.params.MasterpassParams;
 import com.eghl.sdk.params.PaymentParams;
 import com.eghl.sdk.params.Params;
+import com.eghl.sdk.PaymentActivity;
 
 import com.google.gson.Gson;
 
@@ -180,13 +181,13 @@ public class eGHLPay extends CordovaPlugin {
                 .setOrderNumber(eghlPayParams.getOrderNumber());
 
         // eGHL intent.
-        Bundle paymentParams = params.build();
+        Intent payment = new Intent(cordova.getActivity(), PaymentActivity.class);
+        payment.putExtras(params.build());
 
         // Launch the EGHL activity.
         isInProgress = true;
-        eghl.executePayment(paymentParams, cordova.getActivity());
-
-        // Set Callback
+        cordova.startActivityForResult(this, payment, EGHL.REQUEST_PAYMENT);
+        // Set Callback again just in case
         cordova.setActivityResultCallback(this);
     }
 }
