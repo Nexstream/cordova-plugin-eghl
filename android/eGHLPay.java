@@ -187,7 +187,5 @@ public class eGHLPay extends CordovaPlugin {
         // Launch the EGHL activity.
         isInProgress = true;
         cordova.startActivityForResult(this, payment, EGHL.REQUEST_PAYMENT);
-        // Set Callback again just in case
-        cordova.setActivityResultCallback(this);
     }
 }
