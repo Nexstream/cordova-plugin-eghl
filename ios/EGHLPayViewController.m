@@ -70,7 +70,7 @@ necessary (at most one requery before giving up and failing).
     // Initiate payment process
     [self.eghlpay EGHLRequestSale:self.paymentParams
                   successBlock:^(NSString *successData) {}
-                  failedBlock:^(NSString *errorCode, NSString *errorData) {
+                  failedBlock:^(NSString *errorCode, NSString *errorData, NSError *error) {
                       [self.cdvPlugin endPaymentWithFailureMessage:errorData];
                   } ];
 }
@@ -180,7 +180,7 @@ necessary (at most one requery before giving up and failing).
                   successBlock:^(PaymentRespPARAM* result) {
                       [self processResults:result withRequery:NO];
                   }
-                  failedBlock:^(NSString *errorCode, NSString *errorData) {
+                  failedBlock:^(NSString *errorCode, NSString *errorData, NSError *error) {
                       [self.cdvPlugin endPaymentWithCancellation];
                   }];
 }
