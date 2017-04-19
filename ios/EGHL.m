@@ -184,7 +184,7 @@
                                                                      messageAsDictionary:dict]
                                    callbackId:[command callbackId]];
          }
-         failedBlock:^(NSString *errorCode, NSString *errorData) {
+         failedBlock:^(NSString *errorCode, NSString *errorData, NSError *error) {
              [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
                                                                      messageAsString:errorData]
                                    callbackId:[command callbackId]];

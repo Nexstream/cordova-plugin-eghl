@@ -18,8 +18,7 @@
 typedef void (^onPaymentRequest)(PaymentRequestPARAM* RequestData);
 typedef void (^onPaymentResp)(PaymentRespPARAM* ParamData);
 typedef void (^onSuccessResp)(NSString* SuccessData);
-typedef void (^onErrorCB)(NSString* errorCode,NSString* errorData);
-
+typedef void (^onErrorCB)(NSString* errorCode, NSString* errorData, NSError * error);
 @interface EGHLPayment : UIView<UIWebViewDelegate>
 
 @property (nonatomic, weak) id <eGHLDelegate> delegate;
@@ -52,6 +51,20 @@ typedef void (^onErrorCB)(NSString* errorCode,NSString* errorData);
 *   @discussion    start enter to sale payment page and perform an online payment transaction.
 */
 - (void)EGHLRequestSale:(PaymentRequestPARAM *)paymentparam successBlock:(onSuccessResp)successRequestCB failedBlock:(onErrorCB)failedCB;
+
+/**
+ *   @method  paymentAPI:(PaymentRequestPARAM *)paymentparam successBlock:(onPaymentResp)successRequestCB failedBlock:(onErrorCB)failedCB
+ *
+ *   @param   paymentparam   A <code>paymentparam</code> object.
+ *                           include Amount,PaymentID,OrderNumber,MerchantName,ServiceID,PymtMethod,MerchantReturnURL,CustEmail,Password,CustPhone,
+ *                                   CurrencyCode,CustName,LanguageCode,PaymentDesc,PageTimeout,CustIP,MerchantApprovalURL,CustMAC,MerchantUnApprovalURL,CardHolder,
+ *                                   CardNo,CardExp,CardCVV2,BillAddr,ShipPostal,ShipCity,ShipRegion,ShipCountry,TokenType,Token,
+ *                                   SessionID,IssuingBank,MerchantCallBackURL,B4TaxAmt,TaxAmt,Param6,Param7.
+ *   @param   successRequestCB  A success block.
+ *   @param   failedCB          A fail block.
+ *   @discussion    start enter to sale payment page and perform an online payment transaction.
+ */
+- (void)paymentAPI:(PaymentRequestPARAM *)paymentparam successBlock:(onPaymentResp)successRequestCB failedBlock:(onErrorCB)failedCB;
 
 
 /*
@@ -159,6 +172,7 @@ typedef void (^onErrorCB)(NSString* errorCode,NSString* errorData);
 @property (strong, nonatomic) NSString * ShipCity;
 @property (strong, nonatomic) NSString * ShipRegion;
 @property (strong, nonatomic) NSString * ShipCountry;
+@property (strong, nonatomic) NSString * TransactionType;
 @property (strong, nonatomic) NSString * TokenType;
 @property (strong, nonatomic) NSString * Token;
 @property (strong, nonatomic) NSString * SessionID;
