@@ -82,7 +82,15 @@
             @"B4TaxAmt",
             @"TaxAmt",
             @"Param6",
-            @"Param7"
+            @"Param7",
+            @"ReqToken",
+            @"ReqVerifier",
+            @"PairingToken",
+            @"PairingVerifier",
+            @"CheckoutResourceURL",
+            @"CardId",
+            @"PreCheckoutId",
+            @"mpLightboxParameter",
         ];
 
         self.eGHLStringParams_mpeRequest = @[
