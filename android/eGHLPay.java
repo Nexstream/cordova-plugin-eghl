@@ -178,7 +178,15 @@ public class eGHLPay extends CordovaPlugin {
                 .setPaymentMethod(eghlPayParams.getPaymentMethod())
                 .setPaymentTimeout(eghlPayParams.getPaymentTimeout())
                 .setPaymentId(eghlPayParams.getPaymentId())
-                .setOrderNumber(eghlPayParams.getOrderNumber());
+                .setOrderNumber(eghlPayParams.getOrderNumber())
+                .setPromoCode(eghlPayParams.getPromoCode())
+                .setReqToken(eghlPayParams.getReqToken())
+                .setReqVerifier(eghlPayParams.getReqVerifier())
+                .setPairingToken(eghlPayParams.getPairingToken())
+                .setPairingVerifier(eghlPayParams.getPairingVerifier())
+                .setCheckoutResourceURL(eghlPayParams.getCheckoutResourceURL())
+                .setCardID(eghlPayParams.getCardID())
+                .setPreCheckoutID(eghlPayParams.getPreCheckoutID());
 
         // eGHL intent.
         Intent payment = new Intent(cordova.getActivity(), PaymentActivity.class);
