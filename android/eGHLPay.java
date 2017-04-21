@@ -81,6 +81,15 @@ public class eGHLPay extends CordovaPlugin {
         }
     }
 
+    // Required in case Android kills our CordovaActivity while we are in iPay88
+    // activity. See https://cordova.apache.org/docs/en/latest/guide/platforms/android/plugin.html#launching-other-activities
+    // NOTE: we don't implement onSaveInstanceState() as we don't need to save anything...
+    @Override
+    public void onRestoreStateForActivityResult(Bundle state, CallbackContext callbackContext)
+    {
+        cordovaCallbackContext = callbackContext;
+    }
+
     @Override
     public boolean execute (String action, JSONArray args, final CallbackContext callbackContext)
             throws JSONException
