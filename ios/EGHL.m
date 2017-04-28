@@ -41,6 +41,7 @@
     if(self.eGHLStringParams == nil) {
         self.eGHLStringParams = @[
             @"Amount",
+            @"EPPMonth",
             @"PaymentID",
             @"OrderNumber",
             @"MerchantName",
@@ -69,6 +70,7 @@
             @"BillRegion",
             @"BillCountry",
             @"eghlDebugURL",
+            @"PromoCode",
             @"ShipAddr",
             @"ShipPostal",
             @"ShipCity",
@@ -76,6 +78,7 @@
             @"ShipCountry",
             @"TokenType",
             @"Token",
+            @"TransactionType",
             @"SessionID",
             @"IssuingBank",
             @"MerchantCallBackURL",

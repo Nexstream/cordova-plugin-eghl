@@ -48,16 +48,16 @@ eGHL.makePayment(
         MerchantReturnUrl :  "https://*" // redirect when payment complete.
         Amount : "123.10" // e.g. 1000.00 for IDR
                        // Invalid format: 1,000.00 or 1000
-        CustIp : "",
+        CustIP : "",
         CustName : "Beta Tester"
         CustEmail : "Tester@mail.com"
         CustPhone : "60123456789"
         B4TaxAmt : "",
         TaxAmt : "",
         MerchantName : "ABC Sdn Bhd"
-        CustMac : "",
-        MerchantApprovalUrl : "https://*"
-        MerchantUnapprovalUrl : "https://*"
+        CustMAC : "",
+        MerchantApprovalURL : "https://*"
+        MerchantUnApprovalURL : "https://*"
         MerchantCallbackUrl : "https://*" // server callback url
         LanguageCode : "MY" | "EN" | "CN" ...
         PageTimeout : "780" // timeout in seconds
@@ -81,7 +81,7 @@ eGHL.makePayment(
         Token : "",
         Param6 : "",
         Param7 : "",
-        EppMonth : "",
+        EPPMonth : "",
         PromoCode : "",
         ReqToken : "",
         PairingToken : "",

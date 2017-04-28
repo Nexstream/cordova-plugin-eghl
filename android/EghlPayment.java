@@ -46,7 +46,7 @@ public class EghlPayment {
     private String merchantReturnUrl = "";
     @SerializedName("Amount")
     private String amount = "";
-    @SerializedName("CustIp")
+    @SerializedName("CustIP")
     private String custIp = "";
     @SerializedName("CustName")
     private String custName = "";
@@ -60,11 +60,11 @@ public class EghlPayment {
     private String taxAmt = "";
     @SerializedName("MerchantName")
     private String merchantName = "";
-    @SerializedName("CustMac")
+    @SerializedName("CustMAC")
     private String custMac = "";
-    @SerializedName("MerchantApprovalUrl")
+    @SerializedName("MerchantApprovalURL")
     private String merchantApprovalUrl = "";
-    @SerializedName("MerchantUnapprovalURL")
+    @SerializedName("MerchantUnApprovalURL")
     private String merchantUnapprovalUrl = "";
     @SerializedName("MerchantCallBackURL")
     private String merchantCallbackUrl = "";
@@ -112,7 +112,7 @@ public class EghlPayment {
     private String param6 = "";
     @SerializedName("Param7")
     private String param7 = "";
-    @SerializedName("EppMonth")
+    @SerializedName("EPPMonth")
     private String eppMonth = "";
     @SerializedName("PromoCode")
     private String promoCode = "";
