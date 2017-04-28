@@ -126,9 +126,9 @@ public class EghlPayment {
     private String pairingVerifier = "";
     @SerializedName("CheckoutResourceURL")
     private String checkoutResourceURL = "";
-    @SerializedName("CardID")
+    @SerializedName("CardId")
     private String cardID = "";
-    @SerializedName("PreCheckoutID")
+    @SerializedName("PreCheckoutId")
     private String preCheckoutID = "";
     @SerializedName("PaymentTimeout")
     private int paymentTimeout = -1;

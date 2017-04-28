@@ -88,8 +88,8 @@ eGHL.makePayment(
         ReqVerifier : "",
         PairingVerifier : "",
         CheckoutResourceURL : "",
-        CardID : "",
-        PreCheckoutID : "",
+        CardId : "",
+        PreCheckoutId : "",
         PaymentTimeout : -1
         sdkTimeout: 60 // seconds
 
