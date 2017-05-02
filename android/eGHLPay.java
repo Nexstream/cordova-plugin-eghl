@@ -166,6 +166,10 @@ public class eGHLPay extends CordovaPlugin {
     {
         PaymentParams.Builder params;
         params = new PaymentParams.Builder()
+                .setB4TaxAmt(eghlPayParams.getB4TaxAmt())
+                .setTaxAmt(eghlPayParams.getTaxAmt())
+                .setMerchantApprovalUrl(eghlPayParams.getMerchantApprovalUrl())
+                .setMerchantUnapprovalUrl(eghlPayParams.getMerchantUnapprovalUrl())
                 .setMerchantReturnUrl(eghlPayParams.getMerchantReturnUrl())
                 .setMerchantCallbackUrl(eghlPayParams.getMerchantCallbackUrl())
                 .setPaymentDesc(eghlPayParams.getPaymentDesc())
@@ -176,9 +180,22 @@ public class eGHLPay extends CordovaPlugin {
                 .setPassword(eghlPayParams.getPassword())
                 .setIssuingBank(eghlPayParams.getIssuingBank())
                 .setAmount(eghlPayParams.getAmount())
+                .setEppMonth(eghlPayParams.getEppMonth())
+                .setBillAddr(eghlPayParams.getBillAddr())
+                .setBillCity(eghlPayParams.getBillCity())
+                .setBillCountry(eghlPayParams.getBillCountry())
+                .setBillPostal(eghlPayParams.getBillPostal())
+                .setBillRegion(eghlPayParams.getBillRegion())
+                .setShipAddr(eghlPayParams.getShipAddr())
+                .setShipCity(eghlPayParams.getShipCity())
+                .setShipCountry(eghlPayParams.getShipCountry())
+                .setShipPostal(eghlPayParams.getShipPostal())
+                .setShipRegion(eghlPayParams.getShipRegion())
                 .setCustName(eghlPayParams.getCustName())
                 .setCustEmail(eghlPayParams.getCustEmail())
+                .setCustMac(eghlPayParams.getCustMac())
                 .setCustPhone(eghlPayParams.getCustPhone())
+                .setCustIp(eghlPayParams.getCustIp())
                 .setMerchantName(eghlPayParams.getMerchantName())
                 .setCurrencyCode(eghlPayParams.getCurrencyCode())
                 .setToken(eghlPayParams.getToken())
@@ -187,6 +204,7 @@ public class eGHLPay extends CordovaPlugin {
                 .setPaymentMethod(eghlPayParams.getPaymentMethod())
                 .setPaymentTimeout(eghlPayParams.getPaymentTimeout())
                 .setPaymentId(eghlPayParams.getPaymentId())
+                .setSessionId(eghlPayParams.getSessionId())
                 .setOrderNumber(eghlPayParams.getOrderNumber())
                 .setPromoCode(eghlPayParams.getPromoCode())
                 .setReqToken(eghlPayParams.getReqToken())
@@ -195,7 +213,13 @@ public class eGHLPay extends CordovaPlugin {
                 .setPairingVerifier(eghlPayParams.getPairingVerifier())
                 .setCheckoutResourceURL(eghlPayParams.getCheckoutResourceURL())
                 .setCardID(eghlPayParams.getCardID())
-                .setPreCheckoutID(eghlPayParams.getPreCheckoutID());
+                .setCardHolder(eghlPayParams.getCardHolder())
+                .setCardNo(eghlPayParams.getCardNo())
+                .setCardExp(eghlPayParams.getCardExp())
+                .setCardCvv2(eghlPayParams.getCardCvv2())
+                .setPreCheckoutID(eghlPayParams.getPreCheckoutID())
+                .setParam6(eghlPayParams.getParam6())
+                .setParam7(eghlPayParams.getParam7());
 
         // eGHL intent.
         Intent payment = new Intent(cordova.getActivity(), PaymentActivity.class);

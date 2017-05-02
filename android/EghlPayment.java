@@ -78,7 +78,7 @@ public class EghlPayment {
     private String cardNo = "";
     @SerializedName("CardExp")
     private String cardExp = "";
-    @SerializedName("CardCvv2")
+    @SerializedName("CardCVV2")
     private String cardCvv2 = "";
     @SerializedName("IssuingBank")
     private String issuingBank = "";
@@ -102,7 +102,7 @@ public class EghlPayment {
     private String shipRegion = "";
     @SerializedName("ShipCountry")
     private String shipCountry = "";
-    @SerializedName("SessionId")
+    @SerializedName("SessionID")
     private String sessionId = "";
     @SerializedName("TokenType")
     private String tokenType = "";
