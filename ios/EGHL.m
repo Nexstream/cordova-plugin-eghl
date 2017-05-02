@@ -133,7 +133,7 @@
         // Special Masterpass development gateway... For TEMPORARY usage only!
         // TMP FIXME Remove when Masterpass is available in the normal
         // staging/production gateways.
-        [payParams eghlDebugURL: @"https://test2pay.ghl.com/IPGSGOM/Payment.aspx"];
+        [payParams eghlDebugURL: @"https://test2pay.ghl.com/IPGSGOM/Payment.aspx?"];
     } else {
         payParams.realHost = [self isRealHost:gatewayUrl];
     }
@@ -173,7 +173,7 @@
         // Special Masterpass development gateway... For TEMPORARY usage only!
         // TMP FIXME Remove when Masterpass is available in the normal
         // staging/production gateways.
-        [params eghlDebugURL: @"https://test2pay.ghl.com/IPGSGOM/Payment.aspx"];
+        [params eghlDebugURL: @"https://test2pay.ghl.com/IPGSGOM/Payment.aspx?"];
     } else {
         params.realHost = [self isRealHost:gatewayUrl];
     }
