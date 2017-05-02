@@ -30,7 +30,10 @@ eGHL.makePayment(
 
         * Check the eGHL documentation for parameter names.
 
-        * [All Field are defined as String], Except paymentTimeout.
+        * [All Field are defined as String], Except paymentTimeout and sdkTimeout.
+
+        * NOTE: Parameter names and spelling follow iOS, wherever the Android and iOS
+        * names differ!
         */
 
         // List of accepted params and some value detail (refer docs for more detail):
