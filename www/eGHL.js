@@ -38,6 +38,10 @@ eGHL.prototype = {
                 // In fact after parsing, we may find this is an error response.
                 // SAMPLE SUCCESS:
                 // - "ReqToken=312312io321io3uio12&PairingToken=3213123l1jlkj\r\n"
+                // - "{\"preCheckoutId\":\"...\", ..." JSON
+                // - * 1st MPE Response (not paired yet) seems to always return
+                //     key-val pairs. On the other hand, 1st EC Response (already
+                //     paired) seems to return JSON strings...
                 // SAMPLE ERROR:
                 // - ... HTML page with an embedded "href=\"?x=&y=&TxnStatus=1&TxnMessage=some message...\"...
                 try { success(parseAndroidResponse(resp+'')) } // ensure resp is a string
@@ -91,6 +95,12 @@ function parseAndroidResponse (s)
         if(txnMessage) throw new Error(txnMessage[1]);
         else throw new Error();
     } else {
-        return keyValStringToObject(s);
+        try {
+            // Android SDK returns JSON string when user is already paired.
+            return JSON.parse(s);
+        } catch (e) {
+            // But Android SDK returns key-val pair string when user is NOT paired.
+            return keyValStringToObject(s);
+        }
     }
 };
