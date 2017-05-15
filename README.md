@@ -15,6 +15,15 @@ cordova plugin add cordova-plugin-eghl
 Usage
 -----
 
+### Info
+
+To get the version of this plugin at runtime, the following fields are available:
+
+```javascript
+eGHL.version // e.g. '3.0.5'
+eGHL.name // 'eGHL Cordova Plugin'
+```
+
 <a name="makePayment" />
 ### Request payment
 

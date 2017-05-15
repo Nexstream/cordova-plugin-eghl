@@ -4,8 +4,8 @@ var argscheck = require('cordova/argscheck'),
     exec      = require('cordova/exec');
 
 var eGHL = function() {
-    var name = 'eGHL Cordova Plugin';
-    var version = '2.0.1'
+    this.name = 'eGHL Cordova Plugin';
+    this.version = '3.0.5'
 };
 
 eGHL.prototype = {
