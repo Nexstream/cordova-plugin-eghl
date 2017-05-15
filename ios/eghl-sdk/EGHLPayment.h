@@ -24,6 +24,8 @@ typedef void (^onErrorCB)(NSString* errorCode, NSString* errorData, NSError * er
 @property (nonatomic, weak) id <eGHLDelegate> delegate;
 
 @property (nonatomic, strong) UILabel * loadingMessageLabel;
+@property (strong, nonatomic) NSString * finaliseMessage;
+@property (strong, nonatomic) NSString * loadingMPLightBoxMessage;
 
 + (NSString *)version;
 
