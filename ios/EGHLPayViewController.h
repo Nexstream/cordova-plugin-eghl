@@ -4,7 +4,7 @@
 
 @interface EGHLPayViewController : UIViewController <eGHLDelegate>
 
-- (id)initWithEGHLPlugin: (EGHL*)cdvPlugin andPayment:(PaymentRequestPARAM*)payment;
+- (id)initWithEGHLPlugin: (EGHL*)cdvPlugin andPayment:(PaymentRequestPARAM*)payment andOtherParams:(NSDictionary*)otherParams;
 
 - (void)QueryResult: (PaymentRespPARAM*)result;
 
