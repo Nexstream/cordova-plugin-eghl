@@ -148,7 +148,8 @@
 
     EGHLPayViewController *payViewController =
         [[EGHLPayViewController alloc] initWithEGHLPlugin:self
-                                       andPayment:payParams];
+                                       andPayment:payParams
+                                       andOtherParams:args];
     self.contentViewController = [[UINavigationController alloc] initWithRootViewController:payViewController];
     self.contentViewController.delegate = self;
     [self.viewController presentViewController:self.contentViewController
