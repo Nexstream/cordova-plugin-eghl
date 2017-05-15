@@ -15,6 +15,7 @@ cordova plugin add cordova-plugin-eghl
 Usage
 -----
 
+<a name="makePayment" />
 ### Request payment
 
 To request payment via any channel, including Masterpass Express:
@@ -95,7 +96,7 @@ eGHL.makePayment(
         PreCheckoutId : "",
         PaymentTimeout : -1
         sdkTimeout: 60 // seconds
-
+        _finaliseMessage: "Optional message for Finalising Payment (iOS Only)"
     },
     function (resp) {
         // Success callback
@@ -206,3 +207,28 @@ See also:
 
 - https://cordova.apache.org/docs/en/latest/guide/platforms/android/index.html#lifecycle-guide
 - https://cordova.apache.org/docs/en/latest/guide/platforms/android/plugin.html#launching-other-activities
+
+
+### Message Customisation
+
+**iOS:**
+
+On iOS, you can only customise the "Finalising Payment" message. Set your own
+message by setting the `_finaliseMessage` property in the first parameter of
+your [`.makePayment()` call](#makePayment). If you do not set this, the default message set by
+eGHL's SDK will be used.
+
+**Android:**
+
+To customise the messages displayed by the eGHL SDK, set any of these values in
+your `strings.xml`:
+
+```
+<string name="eghl_progress_message">this is from app strings xml progress </string>
+<string name="eghl_verification_message">this is from app strings xml verification</string>
+<string name="eghl_cancel_dialog_title">this is from app strings exit title</string>
+<string name="eghl_cancel_dialog_message">this is from app strings message</string>
+<string name="eghl_prevent_back_toast_message">this is from app strings toast</string>
+<string name="eghl_ssl_error_dialog_title">this is from app strings title ssl </string>
+<string name="eghl_ssl_error_dialog_message">this is from app strings message ssl </string>
+```
