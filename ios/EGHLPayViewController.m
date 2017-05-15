@@ -37,7 +37,7 @@ necessary (at most one requery before giving up and failing).
 
 #pragma mark - Init
 
-- (id)initWithEGHLPlugin: (EGHL*)cdvPlugin andPayment:(PaymentRequestPARAM*)payment;
+- (id)initWithEGHLPlugin: (EGHL*)cdvPlugin andPayment:(PaymentRequestPARAM*)payment andOtherParams:(NSDictionary*)otherParams;
 {
     self = [super init];
     if(self) {
@@ -46,6 +46,11 @@ necessary (at most one requery before giving up and failing).
         self.eghlpay = [[EGHLPayment alloc] init];
         self.eghlpay.delegate = self;
         self.hasCancelled = false;
+
+        NSString *_finaliseMessage = [otherParams objectForKey:@"_finaliseMessage"];
+        if(_finaliseMessage != nil) {
+            self.eghlpay.finaliseMessage = _finaliseMessage;
+        }
     }
     return self;
 }
