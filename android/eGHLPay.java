@@ -97,7 +97,7 @@ public class eGHLPay extends CordovaPlugin {
 
         if(action.equals("makePayment")) {
             if(isInProgress) {
-                callbackContext.error("Another payment is in progress!");
+                callbackContext.error("Another request is in progress. Please wait a few seconds.");
 
             } else {
                 cordovaCallbackContext = callbackContext;
@@ -118,44 +118,54 @@ public class eGHLPay extends CordovaPlugin {
             return true;
 
         } else if(action.equals("mpeRequest")) {
+            if(isInProgress) {
+                callbackContext.error("Another request is in progress. Please wait a few seconds.");
 
-            try{
-                EghlPayment arg0 = new Gson().fromJson(args.getJSONObject(0).toString(), EghlPayment.class);
+            } else {
 
-                MasterpassParams.Builder params = new MasterpassParams.Builder();
-                params.setPaymentGateway(arg0.getPaymentGateway());
-                params.setServiceID(arg0.getServiceId());
-                params.setPassword(arg0.getPassword());
-                params.setCurrencyCode(arg0.getCurrencyCode());
-                params.setAmount(arg0.getAmount());
-                params.setTokenType(arg0.getTokenType());
-                params.setToken(arg0.getToken());
-                params.setPaymentDesc(arg0.getPaymentDesc());
+                isInProgress = true;
 
-                EGHL eghl = EGHL.getInstance();
-                eghl.executeMasterpassRequest(
-                    cordova.getActivity(),
-                    params.build(),
-                    new MasterpassCallback() {
-                        @Override
-                        public void onResponse(final String response) {
-                            // Note: response string needs to be checked on
-                            // JavaScript side, as it could be successful or erronous.
-                            callbackContext.success(response);
+                try{
+                    EghlPayment arg0 = new Gson().fromJson(args.getJSONObject(0).toString(), EghlPayment.class);
+
+                    MasterpassParams.Builder params = new MasterpassParams.Builder();
+                    params.setPaymentGateway(arg0.getPaymentGateway());
+                    params.setServiceID(arg0.getServiceId());
+                    params.setPassword(arg0.getPassword());
+                    params.setCurrencyCode(arg0.getCurrencyCode());
+                    params.setAmount(arg0.getAmount());
+                    params.setTokenType(arg0.getTokenType());
+                    params.setToken(arg0.getToken());
+                    params.setPaymentDesc(arg0.getPaymentDesc());
+
+                    EGHL eghl = EGHL.getInstance();
+                    eghl.executeMasterpassRequest(
+                        cordova.getActivity(),
+                        params.build(),
+                        new MasterpassCallback() {
+                            @Override
+                            public void onResponse(final String response) {
+                                isInProgress = false;
+                                // Note: response string needs to be checked on
+                                // JavaScript side, as it could be successful or erronous.
+                                callbackContext.success(response);
+                            }
+
+                            @Override
+                            public void onError(Exception e) {
+                                isInProgress = false;
+                                callbackContext.error(e.getMessage());
+                            }
                         }
+                    );
 
-                        @Override
-                        public void onError(Exception e) {
-                            callbackContext.error(e.getMessage());
-                        }
-                    }
-                );
+                } catch (Exception e) {
+                    callbackContext.error("Required parameter missing or invalid. " + e.getMessage());
+                }
 
-                return true;
-            } catch (Exception e) {
-                callbackContext.error("Required parameter missing or invalid. " + e.getMessage());
-                return false;
             }
+
+            return true;
 
         } else {
             return false;

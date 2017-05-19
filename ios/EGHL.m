@@ -14,7 +14,7 @@
 
 @interface EGHL ()
 
-@property Boolean paymentInProgress;
+@property Boolean processingInProgress;
 @property UINavigationController *contentViewController;
 @property CDVInvokedUrlCommand* command;
 @property NSArray *eGHLStringParams;
@@ -27,7 +27,7 @@
 
 @implementation EGHL
 
-@synthesize paymentInProgress;
+@synthesize processingInProgress;
 @synthesize contentViewController;
 @synthesize command;
 @synthesize eGHLStringParams;
@@ -109,8 +109,8 @@
 
 - (void)makePayment: (CDVInvokedUrlCommand*)command
 {
-    if(self.paymentInProgress) {
-        [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"A payment is already in progress."]
+    if(self.processingInProgress) {
+        [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Another request is in progress. Please wait a few seconds."]
                               callbackId:[command callbackId]];
         return;
     }
@@ -122,7 +122,7 @@
         return;
     }
 
-    self.paymentInProgress = YES;
+    self.processingInProgress = YES;
     self.command = command;
 
     PaymentRequestPARAM *payParams = [[PaymentRequestPARAM alloc] init];
@@ -159,12 +159,20 @@
 
 - (void)mpeRequest: (CDVInvokedUrlCommand*)command
 {
+    if(self.processingInProgress) {
+        [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Another request is in progress. Please wait a few seconds."]
+                              callbackId:[command callbackId]];
+        return;
+    }
+
     NSDictionary *args = (NSDictionary*) [command argumentAtIndex:0 withDefault:nil andClass:[NSDictionary class]];
     if(args == nil) {
         [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"Argument must be an object."]
                               callbackId:[command callbackId]];
         return;
     }
+
+    self.processingInProgress = YES;
 
     PaymentRequestPARAM *params = [[PaymentRequestPARAM alloc] init];
 
@@ -192,11 +200,13 @@
     [req eGHLMPERequest:params
          successBlock:^(PaymentRespPARAM *resp) {
              NSDictionary *dict = [self objectAsDictionary:resp];
+             self.processingInProgress = NO;
              [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK
                                                                      messageAsDictionary:dict]
                                    callbackId:[command callbackId]];
          }
          failedBlock:^(NSString *errorCode, NSString *errorData, NSError *error) {
+             self.processingInProgress = NO;
              [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR
                                                                      messageAsString:errorData]
                                    callbackId:[command callbackId]];
@@ -209,7 +219,7 @@
 - (void)endPaymentSuccessfullyWithResult: (PaymentRespPARAM*)result
 {
     [self dismissContentView];
-    self.paymentInProgress = NO;
+    self.processingInProgress = NO;
 
     // TODO send some fields e.g. TxnID, AuthCode, etc back to JS
     [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK]
@@ -219,7 +229,7 @@
 - (void)endPaymentWithFailureMessage: (NSString*)message
 {
     [self dismissContentView];
-    self.paymentInProgress = NO;
+    self.processingInProgress = NO;
     [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:message]
                           callbackId:[self.command callbackId]];
 }
@@ -227,7 +237,7 @@
 - (void)endPaymentWithCancellation
 {
     [self dismissContentView];
-    self.paymentInProgress = NO;
+    self.processingInProgress = NO;
     // TMP hard code -999 as cancel payment. (follow android SDK.)
     [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsInt:-999]
                           callbackId:[self.command callbackId]];

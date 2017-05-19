@@ -27,6 +27,10 @@ eGHL.name // 'eGHL Cordova Plugin'
 <a name="makePayment" />
 ### Request payment
 
+Note: `makePayment()` and [`mpeRequest()`](#mpeRequest) only
+allow one ongoing request at any time. Any subsequent calls made while the
+previous request is still ongoing will receive an error.
+
 To request payment via any channel, including Masterpass Express:
 
 ```javascript
@@ -127,7 +131,12 @@ eGHL.makePayment(
 ```
 
 
+<a name="mpeRequest"></a>
 ### Masterpass Express info
+
+Note: [`makePayment()`](#makePayment) and `mpeRequest()` only
+allow one ongoing request at any time. Any subsequent calls made while the
+previous request is still ongoing will receive an error.
 
 ```javascript
 eGHL.mpeRequest(
