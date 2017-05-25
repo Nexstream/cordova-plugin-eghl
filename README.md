@@ -110,6 +110,7 @@ eGHL.makePayment(
         PaymentTimeout : -1
         sdkTimeout: 60 // seconds
         _finaliseMessage: "Optional message for Finalising Payment (iOS Only)"
+        _cancelMessage: "Optional message for Cancelling Payment (iOS Only)"
     },
     function (resp) {
         // Success callback

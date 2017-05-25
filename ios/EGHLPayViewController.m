@@ -51,6 +51,10 @@ necessary (at most one requery before giving up and failing).
         if(_finaliseMessage != nil) {
             self.eghlpay.finaliseMessage = _finaliseMessage;
         }
+        NSString *_cancelMessage = [otherParams objectForKey:@"_cancelMessage"];
+        if(_cancelMessage != nil) {
+            self.eghlpay.cancelMessage = _cancelMessage;
+        }
     }
     return self;
 }
