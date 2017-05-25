@@ -25,6 +25,7 @@ typedef void (^onErrorCB)(NSString* errorCode, NSString* errorData, NSError * er
 
 @property (nonatomic, strong) UILabel * loadingMessageLabel;
 @property (strong, nonatomic) NSString * finaliseMessage;
+@property (strong, nonatomic) NSString * cancelMessage;
 @property (strong, nonatomic) NSString * loadingMPLightBoxMessage;
 
 + (NSString *)version;
@@ -118,7 +119,7 @@ typedef void (^onErrorCB)(NSString* errorCode, NSString* errorData, NSError * er
  *
  *   @discussion    exit payment page.
  */
-- (void)SaleViewStopLoad;
+- (void)saleViewStopLoad;
 
 /*
  *   @method  finalizeTransaction
@@ -251,6 +252,7 @@ typedef void (^onErrorCB)(NSString* errorCode, NSString* errorData, NSError * er
 @property (strong, nonatomic) NSString * TxnID;
 @property (strong, nonatomic) NSString * TxnMessage;
 @property (strong, nonatomic) NSString * TxnStatus;
+@property (strong, nonatomic) NSString * RespTime;
 
 //---------------
 #pragma mark Masterpass fields
