@@ -142,16 +142,9 @@ necessary (at most one requery before giving up and failing).
             // Transaction successful.
             [self.cdvPlugin endPaymentSuccessfullyWithResult:result];
         } else if([result.TxnStatus isEqualToString:@"1"]) {
-            if( result.TxnMessage &&
-                ([result.TxnMessage isEqualToString:@"Buyer cancelled"] ||
-                 [result.TxnMessage isEqualToString:@"Buyer\%20cancelled"])
-            ) {
-                // Transaction cancelled.
-                [self.cdvPlugin endPaymentWithCancellation];
-            } else {
-                // Transaction failed.
-                [self.cdvPlugin endPaymentWithFailureMessage:result.TxnMessage];
-            }
+            // Transaction failed or cancelled.
+            // Check for "buyer cancelled" string in JS
+            [self.cdvPlugin endPaymentWithFailureMessage:result.TxnMessage];
         } else if([result.TxnStatus isEqualToString:@"2"]) {
             if(shouldRequery) {
                 // Transaction pending and should requery.

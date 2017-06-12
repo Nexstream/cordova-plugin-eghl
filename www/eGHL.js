@@ -18,9 +18,15 @@ eGHL.prototype = {
                 if(typeof err != 'string') error(err)
                 else {
                     // eGHL Android SDK's TxnMessage is escaped.
-                    err = decodeURIComponent(err)
-                    err = err.replace(/\+/g, " ")
-                    error(err)
+                    if(cordova.platformId == 'android') {
+                        err = decodeURIComponent(err)
+                        err = err.replace(/\+/g, " ")
+                    }
+
+                    // Native code returns _some variations_ of 'Buyer cancelled'
+                    // based on eGHL's SDK TxnMessage, if user cancelled.
+                    if(/^\s*buyer\s*cancelled\s*$/i.test(err)) error(-999)
+                    else error(err)
                 }
             },
             'eGHL',
