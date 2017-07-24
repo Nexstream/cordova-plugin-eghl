@@ -13,7 +13,7 @@ import com.eghl.sdk.interfaces.MasterpassCallback;
 import com.eghl.sdk.params.MasterpassParams;
 import com.eghl.sdk.params.PaymentParams;
 import com.eghl.sdk.params.Params;
-import com.eghl.sdk.PaymentActivity;
+import com.eghl.sdk.payment.PaymentActivity;
 
 import com.google.gson.Gson;
 
