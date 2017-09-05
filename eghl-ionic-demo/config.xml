@@ -3,7 +3,7 @@
     <name>MyApp</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content original-src="index.html" src="http://192.168.254.14:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-navigation href="http://ionic.local/*" />
     <allow-intent href="http://*/*" />
@@ -80,6 +80,7 @@
     </platform>
     <allow-navigation href="http://192.168.56.1:8100" />
     <allow-navigation href="http://192.168.254.14:8100" />
+    <allow-navigation href="http://192.168.20.162:8100" />
     <engine name="android" spec="^6.2.3" />
     <plugin name="cordova-plugin-console" spec="^1.0.5" />
     <plugin name="cordova-plugin-device" spec="^1.1.4" />
