@@ -19,6 +19,8 @@ typedef void (^onPaymentRequest)(PaymentRequestPARAM* RequestData);
 typedef void (^onPaymentResp)(PaymentRespPARAM* ParamData);
 typedef void (^onSuccessResp)(NSString* SuccessData);
 typedef void (^onErrorCB)(NSString* errorCode, NSString* errorData, NSError * error);
+
+
 @interface EGHLPayment : UIView<UIWebViewDelegate>
 
 @property (nonatomic, weak) id <eGHLDelegate> delegate;
@@ -142,6 +144,7 @@ typedef void (^onErrorCB)(NSString* errorCode, NSString* errorData, NSError * er
  */
 @interface PaymentRequestPARAM : NSObject
 @property BOOL realHost;
+@property BOOL shouldTriggerReturnURL;
 @property (strong, nonatomic) NSString * Amount;
 @property (strong, nonatomic) NSString * PaymentID;
 @property (strong, nonatomic) NSString * OrderNumber;
@@ -254,6 +257,7 @@ typedef void (^onErrorCB)(NSString* errorCode, NSString* errorData, NSError * er
 @property (strong, nonatomic) NSString * TxnStatus;
 @property (strong, nonatomic) NSString * RespTime;
 
+@property (strong, nonatomic) NSDictionary * rawResponseDict;
 //---------------
 #pragma mark Masterpass fields
 //---------------
