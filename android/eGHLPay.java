@@ -44,12 +44,12 @@ public class eGHLPay extends CordovaPlugin {
     {
         if (requestCode == EGHL.REQUEST_PAYMENT) {
             isInProgress = false;
+            String rawResponse = data.getStringExtra(EGHL.RAW_RESPONSE);
             String message = data.getStringExtra(EGHL.TXN_MESSAGE);
             switch (resultCode) {
                 case EGHL.TRANSACTION_SUCCESS:
                     Log.d(TAG, "onActivityResult: payment successful");
-                    cordovaCallbackContext.success(resultCode);
-
+                    cordovaCallbackContext.success(rawResponse);
                     break;
                 case EGHL.TRANSACTION_FAILED:
                     if(message == null) {
