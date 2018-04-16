@@ -4,6 +4,7 @@
 
     <engines>
         <engine name="cordova" version=">=3.0.0" />
+        <engine name="cordova-ios" version=">=4.0.0" />
     </engines>
 
     <name>eGHL</name>

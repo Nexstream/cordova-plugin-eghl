@@ -15,7 +15,7 @@ necessary (at most one requery before giving up and failing).
 
 #pragma mark - "Private" variables
 
-@interface EGHLPayViewController () <UIAlertViewDelegate>
+@interface EGHLPayViewController ()
 
 @property PaymentRequestPARAM *paymentParams;
 @property EGHLPayment *eghlpay;
@@ -95,32 +95,34 @@ necessary (at most one requery before giving up and failing).
 - (void)cancelPaymentPressed: (id)sender
 {
     if(!self.hasCancelled) {
-        UIAlertView * alertExit =
-            [[UIAlertView alloc] initWithTitle:@"Are you sure?"
-                                 message:@"Pressing Abort will abandon the payment session."
-                                 delegate:self
-                                 cancelButtonTitle:@"Continue with Payment"
-                                 otherButtonTitles:@"Abort", nil];
+        UIAlertController *alertView =
+            [UIAlertController alertControllerWithTitle:@"Are you sure?"
+                               message:@"Pressing Abort will abandon the payment session."
+                               preferredStyle:UIAlertControllerStyleAlert];
 
-        [alertExit setTag:CANCEL_PAYMENT_TAG];
-        [alertExit show];
-    }
-}
+        UIAlertAction *actionContinue =
+            [UIAlertAction actionWithTitle:@"Continue with Payment"
+                           style:UIAlertActionStyleCancel
+                           handler:^(UIAlertAction * _Nonnull action) {
+                               // Do nothing, just close this alert.
+                           }];
 
+        UIAlertAction *actionAbort =
+            [UIAlertAction actionWithTitle:@"Abort"
+                           style:UIAlertActionStyleDestructive
+                           handler:^(UIAlertAction * _Nonnull action) {
+                              if(!self.hasCancelled) {
+                                  self.hasCancelled = true;
+                                  [self.eghlpay finalizeTransaction];
+                              }
+                           }];
 
-#pragma mark - UIAlertView delegate
+        [alertView addAction:actionContinue];
+        [alertView addAction:actionAbort];
 
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if(!self.hasCancelled) {
-        switch ([alertView tag]) {
-            case CANCEL_PAYMENT_TAG:
-                if(buttonIndex == 1) {
-                    self.hasCancelled = true;
-                    [self.eghlpay finalizeTransaction];
-                }
-                break;
-        }
+        [self presentViewController:alertView
+              animated:YES
+              completion:^(void){}];
     }
 }
 
