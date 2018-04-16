@@ -80,7 +80,25 @@ necessary (at most one requery before giving up and failing).
     [self.eghlpay EGHLRequestSale:self.paymentParams
                   successBlock:^(NSString *successData) {}
                   failedBlock:^(NSString *errorCode, NSString *errorData, NSError *error) {
-                      [self.cdvPlugin endPaymentWithFailureMessage:errorData];
+                      if(errorData) {
+                          UIAlertController *alertView =
+                              [UIAlertController alertControllerWithTitle:@"Error"
+                                                 message:errorData
+                                                 preferredStyle:UIAlertControllerStyleAlert];
+
+                          UIAlertAction *actionOk =
+                              [UIAlertAction actionWithTitle:@"OK"
+                                             style:UIAlertActionStyleDefault
+                                             handler:^(UIAlertAction * _Nonnull action) {
+                                                 // Do nothing, just close this alert.
+                                             }];
+
+                          [alertView addAction:actionOk];
+
+                          [self presentViewController:alertView
+                                animated:YES
+                                completion:^(void){}];
+                      }
                   } ];
 }
 
