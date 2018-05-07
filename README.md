@@ -56,7 +56,7 @@ eGHL.makePayment(
         TransactionType : "SALE"
 
         PaymentGateway: "https://..." // Payment gateway URL given by eGHL
-        ServiceId : "abc" //Merchant Code or Service ID given by eGHL
+        ServiceID : "abc" //Merchant Code or Service ID given by eGHL
         Password: "password" // Merchant password given by eGHL
 
         PaymentId : "P0000001" // Unique string for each payment
