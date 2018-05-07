@@ -190,6 +190,7 @@ public class eGHLPay extends CordovaPlugin {
                 .setBillCountry(eghlPayParams.getBillCountry())
                 .setBillPostal(eghlPayParams.getBillPostal())
                 .setBillRegion(eghlPayParams.getBillRegion())
+                .setHashValue(eghlPayParams.getHashValue())
                 .setShipAddr(eghlPayParams.getShipAddr())
                 .setShipCity(eghlPayParams.getShipCity())
                 .setShipCountry(eghlPayParams.getShipCountry())

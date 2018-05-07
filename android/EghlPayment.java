@@ -92,6 +92,8 @@ public class EghlPayment {
     private String billRegion = "";
     @SerializedName("BillCountry")
     private String billCountry = "";
+    @SerializedName("HashValue")
+    private String hashValue = "";
     @SerializedName("ShipAddr")
     private String shipAddr = "";
     @SerializedName("ShipPostal")
@@ -405,6 +407,14 @@ public class EghlPayment {
 
     public void setBillCountry(String billCountry) {
         this.billCountry = billCountry;
+    }
+
+    public String getHashValue() {
+        return hashValue;
+    }
+
+    public void setHashValue(String hashValue) {
+        this.hashValue = hashValue;
     }
 
     public String getShipAddr() {
