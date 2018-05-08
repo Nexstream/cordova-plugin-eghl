@@ -70,6 +70,7 @@
             @"BillRegion",
             @"BillCountry",
             @"eghlDebugURL",
+            @"HashValue",
             @"PromoCode",
             @"ShipAddr",
             @"ShipPostal",
