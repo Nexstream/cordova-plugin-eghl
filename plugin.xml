@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-        id="cordova-plugin-eghl" version="3.3.0">
+        id="cordova-plugin-eghl" version="3.4.0">
 
     <engines>
         <engine name="cordova" version=">=3.0.0" />
@@ -35,7 +35,7 @@
 
         <source-file src="android/eGHLPay.java" target-dir="src/my/com/nexstream/cordovaPlugins" />
         <source-file src="android/EghlPayment.java" target-dir="src/my/com/nexstream/cordovaPlugins" />
-        <source-file src="android/eghl-sdk-v2.2.8.aar" target-dir="libs" />
+        <source-file src="android/eghl-sdk-v2.3.4.aar" target-dir="libs" />
     </platform>
 
     <platform name="ios">
