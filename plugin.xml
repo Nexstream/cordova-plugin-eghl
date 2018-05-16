@@ -19,6 +19,8 @@
 
     <platform name="android">
         <framework src="build-extras-eghl.gradle" custom="true" type="gradleReference" />
+        <framework src="com.android.support:appcompat-v7:25.0.1" />
+        <framework src="com.android.support:design:25.0.1" />
         <framework src="com.android.support:support-compat:25.0.1" />
         <config-file target="res/xml/config.xml" parent="/*">
             <preference name="android-minSdkVersion" value="17" />
