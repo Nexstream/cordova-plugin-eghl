@@ -222,9 +222,11 @@
     [self dismissContentView];
     self.processingInProgress = NO;
 
-    // TODO send some fields e.g. TxnID, AuthCode, etc back to JS
-    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK]
-                          callbackId:[self.command callbackId]];
+    // Passing back the raw response with all the fields returned
+    NSDictionary *dict = [self objectAsDictionary:result];
+    [self.commandDelegate sendPluginResult:[CDVPluginResult resultWithStatus:CDVCommandStatus_OK
+                                                            messageAsDictionary:dict]
+                            callbackId:[command callbackId]];
 }
 
 - (void)endPaymentWithFailureMessage: (NSString*)message
