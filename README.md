@@ -52,17 +52,17 @@ eGHL.makePayment(
 
         // List of accepted params and some value detail (refer docs for more detail):
         CurrencyCode : "MYR" | ...
-        PaymentMethod : "ANY" | "AUTH"
+        PymtMethod : "ANY" | "AUTH"
         TransactionType : "SALE"
 
         PaymentGateway: "https://..." // Payment gateway URL given by eGHL
         ServiceID : "abc" //Merchant Code or Service ID given by eGHL
         Password: "password" // Merchant password given by eGHL
 
-        PaymentId : "P0000001" // Unique string for each payment
+        PaymentID : "P0000001" // Unique string for each payment
         OrderNumber : "P0000001" // Order number to refer current payment, can duplicate.
         PaymentDesc : "eGHL Payment testing"
-        MerchantReturnUrl :  "https://*" // redirect when payment complete.
+        MerchantReturnURL :  "https://*" // redirect when payment complete.
         Amount : "123.10" // e.g. 1000.00 for IDR
                        // Invalid format: 1,000.00 or 1000
         CustIP : "",
@@ -75,13 +75,13 @@ eGHL.makePayment(
         CustMAC : "",
         MerchantApprovalURL : "https://*"
         MerchantUnApprovalURL : "https://*"
-        MerchantCallbackUrl : "https://*" // server callback url
+        MerchantCallBackURL : "https://*" // server callback url
         LanguageCode : "MY" | "EN" | "CN" ...
         PageTimeout : "780" // timeout in seconds
         CardHolder : "",
         CardNo : "",
         CardExp : "",
-        CardCvv2 : "",
+        CardCVV2 : "",
         IssuingBank : "",
         BillAddr : "",
         BillPostal : "",
@@ -93,7 +93,7 @@ eGHL.makePayment(
         ShipCity : "",
         ShipRegion : "",
         ShipCountry : "",
-        SessionId : "",
+        SessionID : "",
         TokenType : "",
         Token : "",
         Param6 : "",
